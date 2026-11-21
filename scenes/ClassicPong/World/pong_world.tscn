@@ -1,7 +1,9 @@
 [gd_scene format=4 uid="uid://dnipj1d2jwqu8"]
 
 [ext_resource type="PackedScene" uid="uid://cqhkmefcqp5jv" path="res://scenes/ClassicPong/Player/paddle.tscn" id="1_huotr"]
+[ext_resource type="Script" uid="uid://cqqguunbrdb2c" path="res://scenes/ClassicPong/World/pong_world.gd" id="1_n753g"]
 [ext_resource type="Texture2D" uid="uid://qxgsfryhgfnc" path="res://Assets/Kenney/Monochrome/monochrome_tilemap.png" id="2_13blu"]
+[ext_resource type="PackedScene" uid="uid://dvj4wdo3fi7v" path="res://scenes/ClassicPong/Ball/pong_ball.tscn" id="2_j3bps"]
 [ext_resource type="Texture2D" uid="uid://nw5dik52na5i" path="res://Assets/Kenney/Monochrome/monochrome_tilemap_packed.png" id="3_j3bps"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n753g"]
@@ -859,6 +861,7 @@ sources/0 = SubResource("TileSetAtlasSource_n753g")
 sources/1 = SubResource("TileSetAtlasSource_rrbto")
 
 [node name="PongWorld" type="Node2D" unique_id=1562873341]
+script = ExtResource("1_n753g")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=949509446]
 custom_maximum_size = Vector2(2500, 2500)
@@ -880,10 +883,14 @@ color = Color(0, 0, 0, 1)
 [node name="PlayerPaddle" parent="." unique_id=1197611699 instance=ExtResource("1_huotr")]
 position = Vector2(-700, 0)
 
-[node name="EnemyPaddle" parent="." unique_id=931268084 node_paths=PackedStringArray("playerPaddle") instance=ExtResource("1_huotr")]
+[node name="EnemyPaddle" parent="." unique_id=931268084 node_paths=PackedStringArray("playerPaddle", "ball") instance=ExtResource("1_huotr")]
 position = Vector2(700, 0)
 isPlayer = false
 playerPaddle = NodePath("../PlayerPaddle")
+ball = NodePath("../PongBall")
+
+[node name="PongBall" parent="." unique_id=174273706 instance=ExtResource("2_j3bps")]
+moving = true
 
 [node name="ObstacleLayer" type="TileMapLayer" parent="." unique_id=1677268648]
 scale = Vector2(10, 10)
