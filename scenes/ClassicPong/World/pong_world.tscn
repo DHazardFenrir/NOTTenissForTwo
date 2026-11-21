@@ -877,8 +877,13 @@ color = Color(0, 0, 0, 1)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1003080408]
 
-[node name="Paddle" parent="." unique_id=1197611699 instance=ExtResource("1_huotr")]
+[node name="PlayerPaddle" parent="." unique_id=1197611699 instance=ExtResource("1_huotr")]
 position = Vector2(-700, 0)
+
+[node name="EnemyPaddle" parent="." unique_id=931268084 node_paths=PackedStringArray("playerPaddle") instance=ExtResource("1_huotr")]
+position = Vector2(700, 0)
+isPlayer = false
+playerPaddle = NodePath("../PlayerPaddle")
 
 [node name="ObstacleLayer" type="TileMapLayer" parent="." unique_id=1677268648]
 scale = Vector2(10, 10)
