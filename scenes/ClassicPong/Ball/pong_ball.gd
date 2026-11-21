@@ -3,9 +3,12 @@ extends Area2D
 @export var moving := false
 var direction := Vector2(1.0, 1.0)
 var ball_speed := 300
+@onready var timer: Timer = $Timer
+signal playerScored
+signal enemyScored
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	_reset()
 
 ## Directions: up-right, down-right, down-left, up-left
 
@@ -23,3 +26,22 @@ func _on_body_entered(body: Node2D) -> void:
 	elif not body.is_in_group("PongOut"):
 		direction.y *= -1.0
 	print(direction)
+
+
+func _on_area_entered(area: Area2D) -> void:
+	if area.name == "PlayerOut":
+		enemyScored.emit()
+	if area.name == "EnemyOut":
+		playerScored.emit()
+	_reset()
+	
+
+func _reset() -> void:
+	moving = false
+	direction = Vector2(1.0, 1.0)
+	ball_speed = 300
+	position = Vector2(0.0, 0.0)
+	timer.start()
+
+func _on_timer_timeout() -> void:
+	moving = true

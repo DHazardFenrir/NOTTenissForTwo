@@ -639,6 +639,7 @@ texture = ExtResource("3_j3bps")
 3:9/0 = 0
 4:9/0 = 0
 5:9/0 = 0
+5:9/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 6:9/0 = 0
 7:9/0 = 0
 8:9/0 = 0
@@ -858,8 +859,13 @@ texture = ExtResource("3_j3bps")
 
 [sub_resource type="TileSet" id="TileSet_hm887"]
 physics_layer_0/collision_layer = 1
+physics_layer_1/collision_layer = 2
+physics_layer_1/collision_mask = 2
 sources/0 = SubResource("TileSetAtlasSource_n753g")
 sources/1 = SubResource("TileSetAtlasSource_rrbto")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hm887"]
+size = Vector2(100, 2000)
 
 [node name="PongWorld" type="Node2D" unique_id=1562873341]
 script = ExtResource("1_n753g")
@@ -879,10 +885,10 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="Score" parent="." unique_id=1940285329 instance=ExtResource("2_rrbto")]
+[node name="PlayerScore" parent="." unique_id=1940285329 instance=ExtResource("2_rrbto")]
 position = Vector2(-200, -380)
 
-[node name="Score2" parent="." unique_id=1392174662 instance=ExtResource("2_rrbto")]
+[node name="EnemyScore" parent="." unique_id=1392174662 instance=ExtResource("2_rrbto")]
 position = Vector2(200, -380)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1003080408]
@@ -897,9 +903,27 @@ playerPaddle = NodePath("../PlayerPaddle")
 ball = NodePath("../PongBall")
 
 [node name="PongBall" parent="." unique_id=174273706 instance=ExtResource("2_j3bps")]
-moving = true
 
 [node name="ObstacleLayer" type="TileMapLayer" parent="." unique_id=1677268648]
 scale = Vector2(10, 10)
 tile_map_data = PackedByteArray("AAD6/wMAAQASABEAAAD7/wMAAQASABEAAAD8/wMAAQASABEAAAD9/wMAAQASABEAAAD+/wMAAQASABEAAAD//wMAAQASABEAAAAAAAMAAQASABEAAAABAAMAAQASABEAAAACAAMAAQASABEAAAADAAMAAQASABEAAAAEAAMAAQASABEAAAAFAAMAAQASABEAAAD6//z/AQASABMAAAD7//z/AQASABMAAAD8//z/AQASABMAAAD9//z/AQASABMAAAD+//z/AQASABMAAAD///z/AQASABMAAAAAAPz/AQASABMAAAABAPz/AQASABMAAAACAPz/AQASABMAAAADAPz/AQASABMAAAAEAPz/AQASABMAAAAFAPz/AQASABMAAAA=")
 tile_set = SubResource("TileSet_hm887")
+
+[node name="PlayerOut" type="Area2D" parent="." unique_id=1451474786 groups=["PongOut"]]
+position = Vector2(-1044, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerOut" unique_id=1195751253]
+position = Vector2(35, 0)
+shape = SubResource("RectangleShape2D_hm887")
+debug_color = Color(2.7434528e-06, 0.635324, 0.42233932, 0.41960785)
+
+[node name="EnemyOut" type="Area2D" parent="." unique_id=1450081528 groups=["PongOut"]]
+position = Vector2(977, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyOut" unique_id=1670426343]
+position = Vector2(35, 0)
+shape = SubResource("RectangleShape2D_hm887")
+debug_color = Color(0.97269136, 0, 0.44259292, 0.41960785)
+
+[connection signal="enemyScored" from="PongBall" to="." method="_on_pong_ball_enemy_scored"]
+[connection signal="playerScored" from="PongBall" to="." method="_on_pong_ball_player_scored"]
