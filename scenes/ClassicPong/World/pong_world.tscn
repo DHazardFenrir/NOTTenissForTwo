@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://cqqguunbrdb2c" path="res://scenes/ClassicPong/World/pong_world.gd" id="1_n753g"]
 [ext_resource type="Texture2D" uid="uid://qxgsfryhgfnc" path="res://Assets/Kenney/Monochrome/monochrome_tilemap.png" id="2_13blu"]
 [ext_resource type="PackedScene" uid="uid://dvj4wdo3fi7v" path="res://scenes/ClassicPong/Ball/pong_ball.tscn" id="2_j3bps"]
+[ext_resource type="PackedScene" uid="uid://5n466ydlsou" path="res://scenes/ClassicPong/World/score.tscn" id="2_rrbto"]
 [ext_resource type="Texture2D" uid="uid://nw5dik52na5i" path="res://Assets/Kenney/Monochrome/monochrome_tilemap_packed.png" id="3_j3bps"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n753g"]
@@ -877,6 +878,12 @@ offset_bottom = 1250.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+
+[node name="Score" parent="." unique_id=1940285329 instance=ExtResource("2_rrbto")]
+position = Vector2(-200, -380)
+
+[node name="Score2" parent="." unique_id=1392174662 instance=ExtResource("2_rrbto")]
+position = Vector2(200, -380)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1003080408]
 

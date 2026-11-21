@@ -1,0 +1,89 @@
+[gd_scene format=3 uid="uid://5n466ydlsou"]
+
+[ext_resource type="Script" uid="uid://cng2muon71ub3" path="res://scenes/ClassicPong/World/score.gd" id="1_uge60"]
+[ext_resource type="Texture2D" uid="uid://dpwhhnhgf2uhk" path="res://Assets/Pong/Pong OLD - Numbers.png" id="2_3q50s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6a5ym"]
+atlas = ExtResource("2_3q50s")
+region = Rect2(50, 15, 551, 741)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_78f4x"]
+atlas = ExtResource("2_3q50s")
+region = Rect2(601, 15, 551, 741)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_im37l"]
+atlas = ExtResource("2_3q50s")
+region = Rect2(1152, 15, 551, 741)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ph8d6"]
+atlas = ExtResource("2_3q50s")
+region = Rect2(1703, 15, 551, 741)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v60t4"]
+atlas = ExtResource("2_3q50s")
+region = Rect2(50, 756, 551, 741)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m4dml"]
+atlas = ExtResource("2_3q50s")
+region = Rect2(601, 756, 551, 741)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_em4fb"]
+atlas = ExtResource("2_3q50s")
+region = Rect2(1152, 756, 551, 741)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4eh8s"]
+atlas = ExtResource("2_3q50s")
+region = Rect2(1703, 756, 551, 741)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gkojr"]
+atlas = ExtResource("2_3q50s")
+region = Rect2(50, 1497, 551, 741)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e0g62"]
+atlas = ExtResource("2_3q50s")
+region = Rect2(601, 1497, 551, 741)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hm887"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6a5ym")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_78f4x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_im37l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ph8d6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v60t4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m4dml")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_em4fb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4eh8s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gkojr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e0g62")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Score" type="Node2D" unique_id=1940285329]
+script = ExtResource("1_uge60")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1285878245]
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_hm887")
