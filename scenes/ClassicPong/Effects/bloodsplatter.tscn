@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://vml7sjo25jis"]
+
+[ext_resource type="Script" uid="uid://dbyfjajqo237d" path="res://scenes/ClassicPong/Effects/bloodsplatter.gd" id="1_tj1ra"]
+
+[sub_resource type="Gradient" id="Gradient_j75e1"]
+colors = PackedColorArray(1, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5y5st"]
+gradient = SubResource("Gradient_j75e1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hm887"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 300.0
+initial_velocity_max = 900.0
+angular_velocity_min = -720.0
+angular_velocity_max = 719.99994
+gravity = Vector3(0, 98, 0)
+damping_min = 200.00002
+damping_max = 600.0
+scale_min = 2.0
+scale_max = 6.0
+color_ramp = SubResource("GradientTexture1D_5y5st")
+
+[node name="Bloodsplatter" type="Node2D" unique_id=1074205579]
+script = ExtResource("1_tj1ra")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=362391290]
+emitting = false
+amount = 200
+lifetime = 0.8
+one_shot = true
+explosiveness = 1.0
+randomness = 0.5
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_hm887")

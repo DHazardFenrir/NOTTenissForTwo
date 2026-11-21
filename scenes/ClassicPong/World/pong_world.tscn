@@ -4,8 +4,14 @@
 [ext_resource type="Script" uid="uid://cqqguunbrdb2c" path="res://scenes/ClassicPong/World/pong_world.gd" id="1_n753g"]
 [ext_resource type="Texture2D" uid="uid://qxgsfryhgfnc" path="res://Assets/Kenney/Monochrome/monochrome_tilemap.png" id="2_13blu"]
 [ext_resource type="PackedScene" uid="uid://dvj4wdo3fi7v" path="res://scenes/ClassicPong/Ball/pong_ball.tscn" id="2_j3bps"]
+[ext_resource type="Texture2D" uid="uid://lcs33euk2yj7" path="res://Assets/Pong/Pong OLD - Backgrounds.png" id="2_q4lmw"]
 [ext_resource type="PackedScene" uid="uid://5n466ydlsou" path="res://scenes/ClassicPong/World/score.tscn" id="2_rrbto"]
 [ext_resource type="Texture2D" uid="uid://nw5dik52na5i" path="res://Assets/Kenney/Monochrome/monochrome_tilemap_packed.png" id="3_j3bps"]
+[ext_resource type="Script" uid="uid://cm0y360iouq4" path="res://scenes/ClassicPong/World/camera_2d.gd" id="4_6n00i"]
+[ext_resource type="PackedScene" uid="uid://vml7sjo25jis" path="res://scenes/ClassicPong/Effects/bloodsplatter.tscn" id="6_kv47c"]
+[ext_resource type="Texture2D" uid="uid://ba736lqjutui7" path="res://Assets/Pong/yamcha_dead_by_alexelz_d9xiyk9-fullview.png" id="7_457dm"]
+[ext_resource type="AudioStream" uid="uid://bafav4t3bu405" path="res://Assets/Kenney/SFX/explosion2.ogg" id="8_lgfu1"]
+[ext_resource type="Shader" uid="uid://cwnocaobi6xtg" path="res://scenes/ClassicPong/World/eyelids.gdshader" id="10_kvlk6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n753g"]
 texture = ExtResource("2_13blu")
@@ -867,6 +873,12 @@ sources/1 = SubResource("TileSetAtlasSource_rrbto")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hm887"]
 size = Vector2(100, 2000)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hm887"]
+shader = ExtResource("10_kvlk6")
+shader_parameter/open_amount = 0.999999977648
+shader_parameter/edge_blur_amount = 0.0499999988824
+shader_parameter/color = Color(0.1423794, 0.044523172, 0.0061786347, 1)
+
 [node name="PongWorld" type="Node2D" unique_id=1562873341]
 script = ExtResource("1_n753g")
 
@@ -885,6 +897,22 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1200564772]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2002.0
+offset_top = -1124.0
+offset_right = 5998.0005
+offset_bottom = 3376.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_q4lmw")
+
 [node name="PlayerScore" parent="." unique_id=1940285329 instance=ExtResource("2_rrbto")]
 position = Vector2(-200, -380)
 
@@ -892,9 +920,17 @@ position = Vector2(-200, -380)
 position = Vector2(200, -380)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1003080408]
+script = ExtResource("4_6n00i")
 
 [node name="PlayerPaddle" parent="." unique_id=1197611699 instance=ExtResource("1_huotr")]
 position = Vector2(-700, 0)
+
+[node name="Bloodsplatter" parent="PlayerPaddle" unique_id=1074205579 instance=ExtResource("6_kv47c")]
+
+[node name="playerDed" type="Sprite2D" parent="PlayerPaddle" unique_id=199313510]
+visible = false
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_457dm")
 
 [node name="EnemyPaddle" parent="." unique_id=931268084 node_paths=PackedStringArray("playerPaddle", "ball") instance=ExtResource("1_huotr")]
 position = Vector2(700, 0)
@@ -925,5 +961,31 @@ position = Vector2(35, 0)
 shape = SubResource("RectangleShape2D_hm887")
 debug_color = Color(0.97269136, 0, 0.44259292, 0.41960785)
 
+[node name="NormalGameTimer" type="Timer" parent="." unique_id=969085250]
+wait_time = 20.0
+one_shot = true
+autostart = true
+
+[node name="HurtSound" type="AudioStreamPlayer2D" parent="." unique_id=47094777]
+stream = ExtResource("8_lgfu1")
+pitch_scale = 0.56
+
+[node name="Eyelids" type="ColorRect" parent="." unique_id=490611278]
+material = SubResource("ShaderMaterial_hm887")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.40055594, 0.23988971, 0.18011945, 1)
+
 [connection signal="enemyScored" from="PongBall" to="." method="_on_pong_ball_enemy_scored"]
+[connection signal="playerHurt" from="PongBall" to="." method="_on_pong_ball_player_hurt"]
 [connection signal="playerScored" from="PongBall" to="." method="_on_pong_ball_player_scored"]
+[connection signal="timeout" from="NormalGameTimer" to="." method="_on_normal_game_timer_timeout"]
