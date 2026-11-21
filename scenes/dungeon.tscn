@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bbr5imiyyjbpr" path="res://player.gd" id="1_ubp1v"]
 [ext_resource type="PackedScene" uid="uid://be6upmxpw36i8" path="res://SM_Prop_Lute_01.fbx" id="2_c4wp1"]
 [ext_resource type="Script" uid="uid://cwgbm60wxxkai" path="res://Racket.gd" id="3_fpimf"]
+[ext_resource type="PackedScene" uid="uid://b52p6bx8nl548" path="res://scenes/ball.tscn" id="4_0wj4k"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_um4cd"]
 size = Vector3(14, 1, 11.520508)
@@ -627,5 +628,8 @@ mesh = SubResource("CapsuleMesh_3uqnd")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7695084, -0.2535019)
 
 [node name="SM_Prop_Lute_01" parent="Player/Head/Camera3D" unique_id=1240641287 instance=ExtResource("2_c4wp1")]
-transform = Transform3D(0.33288577, -0.25873202, -0.0024282772, -0.35596824, -0.21915507, 0.22469318, -0.11613729, -0.06988246, -0.6956592, 0.201, -0.18900001, -0.42691714)
+transform = Transform3D(0.33288577, -0.25873202, -0.0024282772, -0.35596824, -0.21915507, 0.22469318, -0.11613729, -0.06988246, -0.6956592, 0.201, -0.33356416, -0.42691714)
 script = ExtResource("3_fpimf")
+
+[node name="Ball" parent="." unique_id=2122994294 instance=ExtResource("4_0wj4k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37742248, 1.4314743, -0.8655387)

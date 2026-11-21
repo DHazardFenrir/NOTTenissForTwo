@@ -7,6 +7,9 @@ var busy:= false
 var blocking:= false
 var next_is_reverse:= false
 
+@export var hit_range:= 3.0
+@export var hit_power:= 15.0
+
 func _ready():
 	reset_pos = position
 	reset_rot = rotation_degrees
@@ -35,6 +38,8 @@ func swing():
 	busy = true
 	new_tween()
 	add_step(Vector3(0.1,0.1,0.15), Vector3(0,-40,60),0.10)
+	tween.tween_callback(hit_balls) 
+	add_step(Vector3(-0.5,0.1,0.0), Vector3(0,90,60),0.14)
 	add_step(Vector3(-0.5,0.1,0.0), Vector3(0,90,60),0.14)
 	add_step(Vector3.ZERO, Vector3.ZERO, 0.2)
 	tween.tween_callback(func():busy=false)
@@ -42,7 +47,9 @@ func swing():
 func reverse():
 	busy = true
 	new_tween()
-	add_step(Vector3(-0.6, 0.1, 0.15), Vector3(0, 40, 60), 0.10)    
+	add_step(Vector3(-0.6, 0.1, 0.15), Vector3(0, 40, 60), 0.10)  
+	tween.tween_callback(hit_balls) 
+	add_step(Vector3(-0.5,0.1,0.0), Vector3(0,90,60),0.14)  
 	add_step(Vector3(0.0, 0.1, 0.0), Vector3(0, -90, 60), 0.14)     
 	add_step(Vector3.ZERO, Vector3.ZERO, 0.2)                     
 	tween.tween_callback(func(): busy = false)
@@ -66,3 +73,16 @@ func new_tween():
 	if tween:
 		tween.kill()
 	tween = create_tween()
+
+func hit_balls():
+	var cam:= get_viewport().get_camera_3d()
+	var forward := -cam.global_basis.z
+	for ball in get_tree().get_nodes_in_group("ball"):
+		var to_ball: Vector3 = ball.global_position - cam.global_position
+		if to_ball.length() < hit_range and to_ball.normalized().dot(forward) > 0.3:
+			var dir:= forward
+			if is_instance_valid(ball.thrower):
+				dir = (ball.thrower.global_position + Vector3.UP *  0.5 - ball.global_position).normalized()
+				ball.linear_velocity = dir * hit_power
+				ball.reflected = true
+	
