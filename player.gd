@@ -1,27 +1,27 @@
 extends CharacterBody3D
 
+@export var speed := 6.0
+@export var turn_speed := 150.0   # grados por segundo
+@export var gravity := 20.0
 
-const SPEED = 5.0
-const GRAVITY = 20
-const SENSITIVITY = 0.005
-@onready var head = $Head
-@onready var cam = $Head/Camera3D
+func _physics_process(delta):
+	# Girar con izquierda/derecha
+	var turn := Input.get_axis("right", "left")
+	rotate_y(deg_to_rad(turn * turn_speed * delta))
 
+	# "Adelante" = hacia donde mira la cámara (sin inclinación)
+	var cam := get_viewport().get_camera_3d()
+	var fwd := -cam.global_basis.z
+	fwd.y = 0
+	fwd = fwd.normalized()
 
-func _physics_process(delta: float) -> void:
-	var dir:= Vector3.ZERO
-	dir.x = Input.get_axis("left", "right")
-	
-	dir.z = Input.get_axis("up", "down")
-	dir = dir.normalized()
-	velocity.x = dir.x * SPEED
-	velocity.z = dir.z * SPEED
-	
+	var forward := Input.get_axis("down", "up")
+	var dir := fwd * forward
+
+	velocity.x = dir.x * speed
+	velocity.z = dir.z * speed
+
 	if not is_on_floor():
-		velocity.y-= GRAVITY * delta
-
-
-	
+		velocity.y -= gravity * delta
 
 	move_and_slide()
-	
