@@ -2,7 +2,10 @@
 
 [ext_resource type="Script" uid="uid://bbr5imiyyjbpr" path="res://player.gd" id="1_ubp1v"]
 [ext_resource type="PackedScene" uid="uid://be6upmxpw36i8" path="res://SM_Prop_Lute_01.fbx" id="2_c4wp1"]
-[ext_resource type="MeshLibrary" uid="uid://c3kkjncgg8m1i" path="res://maze_tiles.tres" id="3_fpimf"]
+[ext_resource type="Script" uid="uid://cwgbm60wxxkai" path="res://Racket.gd" id="3_fpimf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_um4cd"]
+size = Vector3(14, 1, 11.520508)
 
 [sub_resource type="BoxMesh" id="BoxMesh_1oshd"]
 
@@ -12,19 +15,599 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_3uqnd"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_um4cd"]
-size = Vector3(10.998474, 1, 11.520508)
-
 [node name="Dungeon" type="Node3D" unique_id=652314026]
+
+[node name="InitialRectHallway" type="StaticBody3D" parent="." unique_id=1377880794]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InitialRectHallway" unique_id=437484544]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="InitialRectHallway" unique_id=802541567]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="InitialRectHallway" unique_id=1851000015]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InitialRectHallway/StaticBody3D2" unique_id=752815670]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="InitialRectHallway/StaticBody3D2" unique_id=481164666]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 24)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="InitialRectHallway/StaticBody3D2" unique_id=294108]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InitialRectHallway/StaticBody3D2/StaticBody3D" unique_id=1517593191]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="InitialRectHallway/StaticBody3D2/StaticBody3D" unique_id=774631874]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="InitialRectHallway/StaticBody3D2" unique_id=787608850]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InitialRectHallway/StaticBody3D2/StaticBody3D2" unique_id=912951842]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="InitialRectHallway/StaticBody3D2/StaticBody3D2" unique_id=2113611349]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="InitialRectHallway/StaticBody3D2/StaticBody3D2" unique_id=1711813609]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InitialRectHallway/StaticBody3D2/StaticBody3D2/StaticBody3D" unique_id=278434463]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="InitialRectHallway/StaticBody3D2/StaticBody3D2/StaticBody3D" unique_id=1630149753]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="InitialRectHallway/StaticBody3D2/StaticBody3D2" unique_id=1641649420]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InitialRectHallway/StaticBody3D2/StaticBody3D2/StaticBody3D2" unique_id=1763282290]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="InitialRectHallway/StaticBody3D2/StaticBody3D2/StaticBody3D2" unique_id=870396163]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="InitialRectHallway/StaticBody3D2/StaticBody3D2/StaticBody3D2" unique_id=1629784371]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InitialRectHallway/StaticBody3D2/StaticBody3D2/StaticBody3D2/StaticBody3D" unique_id=2000407985]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="InitialRectHallway/StaticBody3D2/StaticBody3D2/StaticBody3D2/StaticBody3D" unique_id=100189743]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="InitialRectHallway/StaticBody3D2/StaticBody3D2/StaticBody3D2" unique_id=17517146]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InitialRectHallway/StaticBody3D2/StaticBody3D2/StaticBody3D2/StaticBody3D2" unique_id=948657385]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="InitialRectHallway/StaticBody3D2/StaticBody3D2/StaticBody3D2/StaticBody3D2" unique_id=441406580]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="InitialRectHallway/StaticBody3D2/StaticBody3D2/StaticBody3D2/StaticBody3D2" unique_id=512068644]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InitialRectHallway/StaticBody3D2/StaticBody3D2/StaticBody3D2/StaticBody3D2/StaticBody3D" unique_id=1523073390]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="InitialRectHallway/StaticBody3D2/StaticBody3D2/StaticBody3D2/StaticBody3D2/StaticBody3D" unique_id=1512315205]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="InitialRectHallway/StaticBody3D2/StaticBody3D2/StaticBody3D2/StaticBody3D2" unique_id=1953957307]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -12)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InitialRectHallway/StaticBody3D2/StaticBody3D2/StaticBody3D2/StaticBody3D2/StaticBody3D2" unique_id=1958821153]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="InitialRectHallway/StaticBody3D2/StaticBody3D2/StaticBody3D2/StaticBody3D2/StaticBody3D2" unique_id=185505220]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 1, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="InitialRectHallway/StaticBody3D2" unique_id=1381418558]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InitialRectHallway/StaticBody3D2/StaticBody3D3" unique_id=1951106478]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="InitialRectHallway/StaticBody3D2/StaticBody3D3" unique_id=324874136]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="TurnRightHallway" type="StaticBody3D" parent="." unique_id=2089546583]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 12, 0, -60)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurnRightHallway" unique_id=1412796660]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.036254883, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="TurnRightHallway" unique_id=313939257]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="TurnRightHallway" type="StaticBody3D" parent="TurnRightHallway" unique_id=2055814797]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurnRightHallway/TurnRightHallway" unique_id=626347996]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="TurnRightHallway/TurnRightHallway" unique_id=1972859406]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="TurnRightHallway" type="StaticBody3D" parent="TurnRightHallway/TurnRightHallway" unique_id=1148763825]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurnRightHallway/TurnRightHallway/TurnRightHallway" unique_id=1579692068]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="TurnRightHallway/TurnRightHallway/TurnRightHallway" unique_id=1696603905]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="TurnRightHallway" type="StaticBody3D" parent="TurnRightHallway/TurnRightHallway/TurnRightHallway" unique_id=1043647914]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurnRightHallway/TurnRightHallway/TurnRightHallway/TurnRightHallway" unique_id=114092148]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="TurnRightHallway/TurnRightHallway/TurnRightHallway/TurnRightHallway" unique_id=23919636]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="TurnRightHallway" type="StaticBody3D" parent="TurnRightHallway/TurnRightHallway/TurnRightHallway/TurnRightHallway" unique_id=1250732745]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurnRightHallway/TurnRightHallway/TurnRightHallway/TurnRightHallway/TurnRightHallway" unique_id=580571966]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="TurnRightHallway/TurnRightHallway/TurnRightHallway/TurnRightHallway/TurnRightHallway" unique_id=694022086]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="TurnRightHallway" type="StaticBody3D" parent="TurnRightHallway/TurnRightHallway/TurnRightHallway/TurnRightHallway/TurnRightHallway" unique_id=320637490]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurnRightHallway/TurnRightHallway/TurnRightHallway/TurnRightHallway/TurnRightHallway/TurnRightHallway" unique_id=1841068244]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="TurnRightHallway/TurnRightHallway/TurnRightHallway/TurnRightHallway/TurnRightHallway/TurnRightHallway" unique_id=223215679]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="TurnRightHallway" type="StaticBody3D" parent="TurnRightHallway/TurnRightHallway/TurnRightHallway/TurnRightHallway/TurnRightHallway/TurnRightHallway" unique_id=1682600374]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurnRightHallway/TurnRightHallway/TurnRightHallway/TurnRightHallway/TurnRightHallway/TurnRightHallway/TurnRightHallway" unique_id=548557798]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="TurnRightHallway/TurnRightHallway/TurnRightHallway/TurnRightHallway/TurnRightHallway/TurnRightHallway/TurnRightHallway" unique_id=1824316797]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="TurnRightHallway" type="StaticBody3D" parent="TurnRightHallway/TurnRightHallway/TurnRightHallway/TurnRightHallway/TurnRightHallway/TurnRightHallway/TurnRightHallway" unique_id=340853189]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurnRightHallway/TurnRightHallway/TurnRightHallway/TurnRightHallway/TurnRightHallway/TurnRightHallway/TurnRightHallway/TurnRightHallway" unique_id=8705443]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="TurnRightHallway/TurnRightHallway/TurnRightHallway/TurnRightHallway/TurnRightHallway/TurnRightHallway/TurnRightHallway/TurnRightHallway" unique_id=613507197]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="TurnForward" type="StaticBody3D" parent="." unique_id=723480484]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 96, 0, -72)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurnForward" unique_id=1640161619]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="TurnForward" unique_id=1791245353]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="TurnForward" type="StaticBody3D" parent="TurnForward" unique_id=2094974744]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurnForward/TurnForward" unique_id=1302794052]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="TurnForward/TurnForward" unique_id=327157792]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="TurnForward" type="StaticBody3D" parent="TurnForward/TurnForward" unique_id=1591642194]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurnForward/TurnForward/TurnForward" unique_id=1842106479]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="TurnForward/TurnForward/TurnForward" unique_id=677310847]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="TurnForward" type="StaticBody3D" parent="TurnForward/TurnForward/TurnForward" unique_id=1568837862]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurnForward/TurnForward/TurnForward/TurnForward" unique_id=323317790]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="TurnForward/TurnForward/TurnForward/TurnForward" unique_id=123236126]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="TurnForward" type="StaticBody3D" parent="TurnForward/TurnForward/TurnForward/TurnForward" unique_id=802828286]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurnForward/TurnForward/TurnForward/TurnForward/TurnForward" unique_id=512614998]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="TurnForward/TurnForward/TurnForward/TurnForward/TurnForward" unique_id=1231985034]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="TurnLeft" type="StaticBody3D" parent="." unique_id=1038673935]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 84, 0, -120)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurnLeft" unique_id=1339501451]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="TurnLeft" unique_id=127877592]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="TurnLeft" type="StaticBody3D" parent="TurnLeft" unique_id=202184190]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurnLeft/TurnLeft" unique_id=2110562370]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="TurnLeft/TurnLeft" unique_id=820932178]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="TurnLeft" type="StaticBody3D" parent="TurnLeft/TurnLeft" unique_id=670840020]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurnLeft/TurnLeft/TurnLeft" unique_id=854570688]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="TurnLeft/TurnLeft/TurnLeft" unique_id=1594222213]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="TurnLeft" type="StaticBody3D" parent="TurnLeft/TurnLeft/TurnLeft" unique_id=1687383077]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurnLeft/TurnLeft/TurnLeft/TurnLeft" unique_id=1657675783]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="TurnLeft/TurnLeft/TurnLeft/TurnLeft" unique_id=1302661946]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="TurnLeft" type="StaticBody3D" parent="TurnLeft/TurnLeft/TurnLeft/TurnLeft" unique_id=1585530922]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft" unique_id=1257618046]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft" unique_id=891644200]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="TurnLeft" type="StaticBody3D" parent="TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft" unique_id=318743398]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft" unique_id=371264475]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft" unique_id=352972412]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="TurnLeft" type="StaticBody3D" parent="TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft" unique_id=676256807]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft" unique_id=1387893799]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft" unique_id=1616178275]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="TurnLeft" type="StaticBody3D" parent="TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft" unique_id=46085138]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft" unique_id=400442708]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft" unique_id=657321944]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="TurnLeft" type="StaticBody3D" parent="TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft" unique_id=902976862]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft" unique_id=971618881]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft" unique_id=1229533622]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="TurnLeft" type="StaticBody3D" parent="TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft" unique_id=1471471304]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft" unique_id=578060949]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft" unique_id=1135865693]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="TurnLeft" type="StaticBody3D" parent="TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft" unique_id=1918186620]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft" unique_id=1977956162]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft" unique_id=971091724]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="TurnLeft" type="StaticBody3D" parent="TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft" unique_id=622527447]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft" unique_id=527258087]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft" unique_id=511612941]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="TurnLeft" type="StaticBody3D" parent="TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft" unique_id=167593588]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft" unique_id=828538786]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft" unique_id=908361715]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="TurnLeft" type="StaticBody3D" parent="TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft" unique_id=64219742]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft" unique_id=91714245]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft/TurnLeft" unique_id=922116288]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="TurnDown" type="StaticBody3D" parent="." unique_id=281412973]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 1, -59, 0, -109)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurnDown" unique_id=165421255]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="TurnDown" unique_id=784163191]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="TurnDown" type="StaticBody3D" parent="TurnDown" unique_id=2131568697]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurnDown/TurnDown" unique_id=907373035]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="TurnDown/TurnDown" unique_id=1739131634]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="TurnDown" type="StaticBody3D" parent="TurnDown/TurnDown" unique_id=1616270648]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurnDown/TurnDown/TurnDown" unique_id=2104074701]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="TurnDown/TurnDown/TurnDown" unique_id=1350015300]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="TurnDown" type="StaticBody3D" parent="TurnDown/TurnDown/TurnDown" unique_id=528157885]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurnDown/TurnDown/TurnDown/TurnDown" unique_id=945795048]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="TurnDown/TurnDown/TurnDown/TurnDown" unique_id=381600792]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="TurnDown" type="StaticBody3D" parent="TurnDown/TurnDown/TurnDown/TurnDown" unique_id=658973635]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurnDown/TurnDown/TurnDown/TurnDown/TurnDown" unique_id=679946503]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="TurnDown/TurnDown/TurnDown/TurnDown/TurnDown" unique_id=1593526454]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="TurnDown" type="StaticBody3D" parent="TurnDown/TurnDown/TurnDown/TurnDown/TurnDown" unique_id=1153686970]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurnDown/TurnDown/TurnDown/TurnDown/TurnDown/TurnDown" unique_id=1159703036]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="TurnDown/TurnDown/TurnDown/TurnDown/TurnDown/TurnDown" unique_id=1521408518]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="TurnRight" type="StaticBody3D" parent="." unique_id=25693805]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 1, -71, 0, -49)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurnRight" unique_id=436484233]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="TurnRight" unique_id=1084202979]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="TurnRight" type="StaticBody3D" parent="TurnRight" unique_id=175348202]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurnRight/TurnRight" unique_id=782238533]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="TurnRight/TurnRight" unique_id=901287127]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="TurnRight" type="StaticBody3D" parent="TurnRight/TurnRight" unique_id=1805414084]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurnRight/TurnRight/TurnRight" unique_id=234671550]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="TurnRight/TurnRight/TurnRight" unique_id=203512186]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="TurnRight" type="StaticBody3D" parent="TurnRight/TurnRight/TurnRight" unique_id=1121868774]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurnRight/TurnRight/TurnRight/TurnRight" unique_id=1673982828]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="TurnRight/TurnRight/TurnRight/TurnRight" unique_id=1971000347]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
+
+[node name="TurnRight" type="StaticBody3D" parent="TurnRight/TurnRight/TurnRight/TurnRight" unique_id=1658135354]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurnRight/TurnRight/TurnRight/TurnRight/TurnRight" unique_id=1863984832]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
+shape = SubResource("BoxShape3D_um4cd")
+
+[node name="Plane" type="CSGMesh3D" parent="TurnRight/TurnRight/TurnRight/TurnRight/TurnRight" unique_id=2005353653]
+transform = Transform3D(12.062957, 0, 0, 0, 0.16023633, 0, 0, 0, 12.062957, 0, 0, 0)
+mesh = SubResource("BoxMesh_1oshd")
+material = SubResource("StandardMaterial3D_um4cd")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=102645056]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 5.742964, 4.804682, 0)
 shadow_enabled = true
-
-[node name="Plane" type="CSGMesh3D" parent="." unique_id=802541567]
-transform = Transform3D(12.062957, 0, 0, 0, 0.16023631, 0, 0, 0, 12.062957, 0, 0, 0)
-mesh = SubResource("BoxMesh_1oshd")
-material = SubResource("StandardMaterial3D_um4cd")
 
 [node name="Player" type="CharacterBody3D" parent="." unique_id=2059101078]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.22263336, 0)
@@ -44,16 +627,5 @@ mesh = SubResource("CapsuleMesh_3uqnd")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7695084, -0.2535019)
 
 [node name="SM_Prop_Lute_01" parent="Player/Head/Camera3D" unique_id=1240641287 instance=ExtResource("2_c4wp1")]
-transform = Transform3D(0.33280152, -0.25878316, -0.0026891232, -0.35609436, -0.21918342, 0.2241438, -0.11599194, -0.06960366, -0.6958355, 0.20141846, -0.18890476, -0.40466136)
-
-[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1377880794]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=437484544]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46450806, 0, -0.0034179688)
-shape = SubResource("BoxShape3D_um4cd")
-
-[node name="GridMap" type="GridMap" parent="." unique_id=706105879]
-mesh_library = ExtResource("3_fpimf")
-data = {
-"cells": PackedInt32Array(2, 65532, 0, 1, 65532, 0, 0, 65532, 0, 65535, 65532, 0, 65534, 65532, 1, 65533, 65532, 1, 65532, 2, 0, 65532, 1, 0, 65532, 0, 0, 65532, 65535, 0, 65532, 65534, 0, 65532, 65533, 0)
-}
+transform = Transform3D(0.33288577, -0.25873202, -0.0024282772, -0.35596824, -0.21915507, 0.22469318, -0.11613729, -0.06988246, -0.6956592, 0.201, -0.18900001, -0.42691714)
+script = ExtResource("3_fpimf")
