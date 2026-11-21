@@ -20,6 +20,11 @@ config/icon="res://icon.svg"
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[global_group]
+
+PongPaddle="Paddles in Pong world"
+PongOut="The outside limits for pong (for scoring)"
+
 [input]
 
 up={
