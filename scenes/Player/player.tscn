@@ -8,6 +8,57 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_3uqnd"]
 
+[sub_resource type="Animation" id="Animation_hvfru"]
+resource_name = "Block"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/Camera3D/SM_Prop_Lute_01:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.201, -0.33356416, -0.42691714), Vector3(0.02660814, 0.05252129, -0.42691714)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head/Camera3D/SM_Prop_Lute_01:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.3124139, -3.138102, -2.2985985), Vector3(0.019444514, 2.8297458, -0.65620404)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Hitbox:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:swinging")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
 [sub_resource type="Animation" id="Animation_gqjuk"]
 length = 0.001
 tracks/0/type = "value"
@@ -110,10 +161,63 @@ tracks/3/keys = {
 "values": [false, true, false, false]
 }
 
+[sub_resource type="Animation" id="Animation_uiqp4"]
+resource_name = "Swing2"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/Camera3D/SM_Prop_Lute_01:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.201, -0.33356416, -0.42691714), Vector3(0.201, -0.33356416, -0.42691714), Vector3(0.201, -0.33356416, -0.42691714), Vector3(0.201, -0.33356416, -0.42691714)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head/Camera3D/SM_Prop_Lute_01:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.3124139, -3.138102, -2.2985985), Vector3(0.1478755, -2.8653557, 1.9458355), Vector3(0.1478755, 2.2192745, 1.9458354), Vector3(-0.3124139, -3.138102, -2.2985985)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:swinging")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hitbox:monitoring")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_uiqp4"]
 _data = {
+&"Block": SubResource("Animation_hvfru"),
 &"RESET": SubResource("Animation_gqjuk"),
-&"Swing": SubResource("Animation_c4h5g")
+&"Swing": SubResource("Animation_c4h5g"),
+&"Swing2": SubResource("Animation_uiqp4")
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5y5st"]
@@ -134,7 +238,7 @@ mesh = SubResource("CapsuleMesh_3uqnd")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.5)
 
 [node name="SM_Prop_Lute_01" parent="Head/Camera3D" unique_id=1832657628 instance=ExtResource("2_c4h5g")]
-transform = Transform3D(0.33221257, -0.2578348, -0.0024247882, -0.35524836, -0.21839508, 0.22437032, -0.1159024, -0.069640115, -0.6946597, 0.201, -0.33356416, -0.42691714)
+transform = Transform3D(0.3322125, -0.2578348, -0.0024247877, -0.3552483, -0.21839508, 0.22437027, -0.11590239, -0.069640115, -0.69465953, 0.201, -0.33356416, -0.42691714)
 script = ExtResource("3_uiqp4")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=370463886 groups=["Actors", "Player"]]

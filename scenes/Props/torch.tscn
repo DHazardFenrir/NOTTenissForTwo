@@ -10,7 +10,7 @@ height = 0.5
 [node name="Torch" type="OmniLight3D" parent="." unique_id=1181630801]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.33893555, 0)
 light_color = Color(1.7195034, 0.9367302, 0, 1)
-omni_range = 250.0
+omni_range = 1.346
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=737134368]
 mesh = SubResource("CylinderMesh_hm887")

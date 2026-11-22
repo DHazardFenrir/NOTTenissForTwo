@@ -7,6 +7,9 @@ extends CharacterBody3D
 @export var swingPower := 1.0
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
+var blocking:= false
+var next_is_double:= false
+
 func _physics_process(delta):
 	# Girar con izquierda/derecha
 	#var turn := Input.get_axis("right", "left")
@@ -26,13 +29,35 @@ func _physics_process(delta):
 
 	if not is_on_floor():
 		velocity.y -= gravity * delta
+	
 	if Input.is_action_just_pressed("attack"):
-		_swing()
+		if not animation_player.is_playing() and not blocking:
+			if next_is_double:
+				_double_swing()
+			else:
+				_swing()
+			next_is_double = not next_is_double
+
+	if Input.is_action_just_pressed("block"):
+		_block()
+	if Input.is_action_just_released("block"):
+		_unblock()
+	
 	move_and_slide()
 
 func _swing() -> void:
 	animation_player.play("Swing")
 	
+
+func _double_swing()-> void:
+	animation_player.play("Swing2")
+	
+
+func _block()-> void:
+	animation_player.play("Block")
+
+func _unblock()-> void:
+	animation_player.play("RESET")
 
 func _on_hitbox_body_entered(body: Node3D) -> void:
 	print(body)
