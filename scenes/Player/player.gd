@@ -83,9 +83,9 @@ func unlock():
 
 
 func _on_hitbox_body_entered(body):
+	print(anim.current_animation)
 	if not body.is_in_group("ball"):
 		return
-
 	var power = 0.0
 	if blocking:
 		power = block_power
@@ -93,7 +93,6 @@ func _on_hitbox_body_entered(body):
 		power = swing_power
 	else:
 		return
-
 	var dir = -global_basis.z
 	dir.y = 0.2
 	body.linear_velocity = Vector3.ZERO

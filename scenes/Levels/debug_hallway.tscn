@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://gx65tgdn4m3i" path="res://scenes/Props/torch.tscn" id="1_bjorx"]
 [ext_resource type="PackedScene" uid="uid://d3udu2hwx0aak" path="res://scenes/Levels/initial_hallway.tscn" id="1_t45hr"]
-[ext_resource type="PackedScene" uid="uid://dtxkmxyxskx7k" path="res://scenes/Enemy/enemy_manager.tscn" id="2_n1alr"]
+[ext_resource type="PackedScene" uid="uid://dtxkmxyxskx7k" path="res://scenes/Enemy/enemy_area.tscn" id="2_n1alr"]
 [ext_resource type="PackedScene" uid="uid://dt4exijh73hko" path="res://scenes/Enemy/enemy.tscn" id="3_t45hr"]
 [ext_resource type="PackedScene" uid="uid://b52p6bx8nl548" path="res://scenes/Ball/ball.tscn" id="5_n1alr"]
 [ext_resource type="PackedScene" uid="uid://c0kobsfpf1uqd" path="res://scenes/UI/hud.tscn" id="7_wtasy"]

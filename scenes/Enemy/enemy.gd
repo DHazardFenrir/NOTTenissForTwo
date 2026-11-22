@@ -9,6 +9,10 @@ enum HitStyle { PONG, REFLECT }
 @export var max_bounce_angle := 60.0
 @export var walkable_area: Area3D
 @export var difficulty: Difficulty = Difficulty.MEDIUM
+@export var health = 1
+@onready var hurtbox: Area3D = $Hurtbox
+
+signal deadEnemySignal
 
 var _min: Vector3
 var _max: Vector3
@@ -110,3 +114,23 @@ func _on_hitbox_body_entered(body: Node3D) -> void:
 
 	body.linear_velocity = Vector3.ZERO
 	body.apply_central_impulse(dir.normalized() * hit_power)
+
+var is_dead := false
+
+func _on_hurtbox_body_entered(body: Node3D) -> void:
+	if body.is_in_group("Balls"):
+		_enemy_take_damage()
+
+func _enemy_take_damage(value = 1) -> void:
+	if is_dead:
+		return
+	health -= value
+	if health <= 0:
+		_enemy_death()
+
+func _enemy_death() -> void:
+	is_dead = true
+	hurtbox.set_deferred("monitoring", false)
+	deadEnemySignal.emit()
+	queue_free()
+	

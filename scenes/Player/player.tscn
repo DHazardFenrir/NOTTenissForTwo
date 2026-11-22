@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://cwgbm60wxxkai" path="res://scenes/Racket/Racket.gd" id="3_uiqp4"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3uqnd"]
+radius = 1.0
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_3uqnd"]
 
@@ -221,7 +222,7 @@ _data = {
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5y5st"]
-size = Vector3(3, 1.5, 2)
+size = Vector3(3, 1.5, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hm887"]
 size = Vector3(20, 10, 1)
