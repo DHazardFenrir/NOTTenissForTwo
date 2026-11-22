@@ -9,6 +9,9 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_hm887"]
 size = Vector3(2, 2, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_muyyy"]
+size = Vector3(20, 10, 1)
+
 [node name="Enemy" type="CharacterBody3D" unique_id=1933570996 groups=["Actors"]]
 script = ExtResource("1_muyyy")
 
@@ -23,5 +26,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.142293)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" unique_id=111275113]
 shape = SubResource("BoxShape3D_hm887")
+
+[node name="Hurtbox" type="Area3D" parent="." unique_id=1470943474]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox" unique_id=1795478177]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.300175)
+shape = SubResource("BoxShape3D_muyyy")
+debug_color = Color(0.9886814, 0, 0.3044817, 0.41960785)
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

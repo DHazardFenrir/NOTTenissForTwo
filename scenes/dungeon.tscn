@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bdcbl87t7lit2" path="res://scenes/Player/player.tscn" id="1_c4wp1"]
 [ext_resource type="PackedScene" uid="uid://d3udu2hwx0aak" path="res://scenes/Levels/initial_hallway.tscn" id="1_fpimf"]
+[ext_resource type="PackedScene" uid="uid://c0kobsfpf1uqd" path="res://scenes/UI/hud.tscn" id="1_hsn05"]
 [ext_resource type="PackedScene" uid="uid://cdi8w7vb3g7tf" path="res://scenes/Levels/level_one.tscn" id="2_0wj4k"]
 [ext_resource type="PackedScene" uid="uid://b52p6bx8nl548" path="res://scenes/Ball/ball.tscn" id="4_0wj4k"]
 [ext_resource type="PackedScene" uid="uid://c053tv1pp21r2" path="res://scenes/Levels/left_hallway.tscn" id="5_fvacq"]
@@ -16,6 +17,8 @@ _data = {
 point_count = 75
 
 [node name="Dungeon" type="Node3D" unique_id=652314026]
+
+[node name="HUD" parent="." unique_id=1101074698 instance=ExtResource("1_hsn05")]
 
 [node name="LevelOne3" parent="." unique_id=1029602578 instance=ExtResource("2_0wj4k")]
 transform = Transform3D(-0.0047180913, 0, -0.99998885, 0, 1, 0, 0.99998885, 0, -0.0047180913, 44.612556, -0.0178473, -54.70628)
