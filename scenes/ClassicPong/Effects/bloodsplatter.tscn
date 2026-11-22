@@ -28,7 +28,7 @@ script = ExtResource("1_tj1ra")
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=362391290]
 emitting = false
 amount = 200
-lifetime = 0.8
+lifetime = 3.0
 one_shot = true
 explosiveness = 1.0
 randomness = 0.5

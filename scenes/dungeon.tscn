@@ -6,9 +6,19 @@
 [ext_resource type="Script" uid="uid://dnn5sqqtw4qsd" path="res://scenes/dungeon.gd" id="1_tkjml"]
 [ext_resource type="PackedScene" uid="uid://cdi8w7vb3g7tf" path="res://scenes/Levels/level_one.tscn" id="2_0wj4k"]
 [ext_resource type="PackedScene" uid="uid://cakiylf2y2xv4" path="res://scenes/Levels/encounter.tscn" id="2_5hkx1"]
+[ext_resource type="PackedScene" uid="uid://bsnv283y2i13p" path="res://scenes/Cutscenes/cutscene2.tscn" id="2_7a5bf"]
+[ext_resource type="Texture2D" uid="uid://t2gbv81wrvwc" path="res://Assets/Pong/Textures/Characters/Front side Mini-pong.png" id="4_pnxem"]
+[ext_resource type="Texture2D" uid="uid://05nnkj2mkb3n" path="res://Assets/Pong/Textures/Characters/PurplePaddle.png" id="5_3afjq"]
 [ext_resource type="PackedScene" uid="uid://c053tv1pp21r2" path="res://scenes/Levels/left_hallway.tscn" id="5_fvacq"]
 [ext_resource type="PackedScene" uid="uid://d0ga7atkt1oih" path="res://scenes/Levels/hallway_right.tscn" id="6_ys5p8"]
+[ext_resource type="Shader" uid="uid://cwnocaobi6xtg" path="res://scenes/ClassicPong/World/eyelids.gdshader" id="7_7wjui"]
 [ext_resource type="Script" uid="uid://cvlrtu8pwfdoa" path="res://scenes/enemy_manager.gd" id="9_tkjml"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7a5bf"]
+shader = ExtResource("7_7wjui")
+shader_parameter/open_amount = 0.999999977648
+shader_parameter/edge_blur_amount = 0.0499999988824
+shader_parameter/color = Color(0.1423794, 0.044523172, 0.0061786347, 1)
 
 [sub_resource type="Curve3D" id="Curve3D_ys5p8"]
 bake_interval = 2.18
@@ -20,6 +30,7 @@ point_count = 75
 
 [node name="Dungeon" type="Node3D" unique_id=652314026]
 script = ExtResource("1_tkjml")
+next_scene = ExtResource("2_7a5bf")
 
 [node name="EncounterManager" type="Node3D" parent="." unique_id=440692106 node_paths=PackedStringArray("player", "encounters")]
 script = ExtResource("9_tkjml")
@@ -28,22 +39,42 @@ encounters = [NodePath("Encounter1"), NodePath("Encounter2"), NodePath("Encounte
 
 [node name="Encounter1" parent="EncounterManager" unique_id=616231138 instance=ExtResource("2_5hkx1")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 1.499325, -30.522259)
+enemy_texture = ExtResource("5_3afjq")
+enemy_vertical_scale = 2.0
 
 [node name="Encounter2" parent="EncounterManager" unique_id=2866719 instance=ExtResource("2_5hkx1")]
 transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, 54.351692, 1.8361988, -54.305157)
+enemy_texture = ExtResource("4_pnxem")
 
 [node name="Encounter3" parent="EncounterManager" unique_id=1878003849 instance=ExtResource("2_5hkx1")]
 transform = Transform3D(-0.9999999, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.9999999, 102.90512, 1.3081899, -99.22046)
 
 [node name="HUD" parent="." unique_id=1101074698 instance=ExtResource("1_hsn05")]
 
-[node name="LevelOne3" parent="." unique_id=1029602578 instance=ExtResource("2_0wj4k")]
-transform = Transform3D(-0.0047180913, 0, -0.99998885, 0, 1, 0, 0.99998885, 0, -0.0047180913, 44.612556, -0.0178473, -54.70628)
+[node name="Eyelids" type="ColorRect" parent="HUD" unique_id=1723119368]
+material = SubResource("ShaderMaterial_7a5bf")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.40055594, 0.23988971, 0.18011945, 1)
 
-[node name="InitialHallway" parent="." unique_id=295484901 instance=ExtResource("1_fpimf")]
+[node name="LevelOne" type="Marker3D" parent="." unique_id=176885654]
 
-[node name="LevelOne" parent="." unique_id=1185466771 instance=ExtResource("2_0wj4k")]
+[node name="LevelOneSpawn" parent="LevelOne" unique_id=295484901 instance=ExtResource("1_fpimf")]
+
+[node name="LevelOneHallway" parent="LevelOne" unique_id=1185466771 instance=ExtResource("2_0wj4k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -19.990135)
+
+[node name="LevelOneTurn" parent="LevelOne" unique_id=957750416 instance=ExtResource("5_fvacq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03488636, -0.01183033, -39.886875)
 
 [node name="Path3D" type="Path3D" parent="." unique_id=1106871696]
 curve = SubResource("Curve3D_ys5p8")
@@ -65,20 +96,25 @@ transform = Transform3D(0.33221257, -0.25783482, -0.0024247882, -0.35524836, -0.
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 5.742964, 4.804682, 0)
 shadow_enabled = true
 
-[node name="Node3D" parent="." unique_id=957750416 instance=ExtResource("5_fvacq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03488636, -0.01183033, -39.886875)
+[node name="LevelTwo" type="Marker3D" parent="." unique_id=1197543195]
 
-[node name="InitialHallway2" parent="." unique_id=1894744364 instance=ExtResource("1_fpimf")]
+[node name="LevelTwo1" parent="LevelTwo" unique_id=1894744364 instance=ExtResource("1_fpimf")]
 transform = Transform3D(0.023589566, 0, -0.9997217, 0, 1, 0, 0.9997217, 0, 0.023589566, 5.212161, -0.008284539, -54.15397)
 
-[node name="InitialHallway3" parent="." unique_id=8168662 instance=ExtResource("1_fpimf")]
+[node name="LevelTwo2" parent="LevelTwo" unique_id=8168662 instance=ExtResource("1_fpimf")]
 transform = Transform3D(0.007940184, 0, -0.9999688, 0, 1, 0, 0.9999688, 0, 0.007940184, 24.6916, -0.016569078, -54.586655)
 
-[node name="InitialHallway5" parent="." unique_id=453052707 instance=ExtResource("1_fpimf")]
+[node name="LevelTwo3" parent="LevelTwo" unique_id=1029602578 instance=ExtResource("2_0wj4k")]
+transform = Transform3D(-0.0047180913, 0, -0.99998885, 0, 1, 0, 0.99998885, 0, -0.0047180913, 44.612556, -0.0178473, -54.70628)
+
+[node name="LevelTwo4" parent="LevelTwo" unique_id=453052707 instance=ExtResource("1_fpimf")]
 transform = Transform3D(-0.023360612, 0, -0.99972814, 0, 1, 0, 0.99972814, 0, -0.023360612, 63.658886, -0.033138156, -54.537224)
 
-[node name="InitialHallway6" parent="." unique_id=795071970 instance=ExtResource("1_fpimf")]
+[node name="LevelTwo5" parent="LevelTwo" unique_id=795071970 instance=ExtResource("1_fpimf")]
 transform = Transform3D(-0.03900436, 0, -0.99924046, 0, 1, 0, 0.99924046, 0, -0.03900436, 83.137184, -0.041422695, -54.055122)
+
+[node name="LevelTwo6" parent="LevelTwo" unique_id=651832745 instance=ExtResource("5_fvacq")]
+transform = Transform3D(-0.99961495, 0, 0.027750507, 0, 1, 0, -0.027750507, 0, -0.99961495, 102.44298, -0.05065155, -67.640366)
 
 [node name="InitialHallway7" parent="." unique_id=379844021 instance=ExtResource("1_fpimf")]
 transform = Transform3D(-0.9989106, 0, 0.04670852, 0, 1, 0, -0.04670852, 0, -0.9989106, 103.34335, -0.0138652325, -87.006775)
@@ -88,9 +124,6 @@ transform = Transform3D(0.99993944, 0, -0.0113667995, 0, 1, 0, 0.0113667995, 0, 
 
 [node name="InitialHallway9" parent="." unique_id=286746191 instance=ExtResource("1_fpimf")]
 transform = Transform3D(0.9997489, 0, -0.02273222, 0, 1, 0, 0.02273222, 0, 0.9997489, 103.77019, -0.05363536, -132.72784)
-
-[node name="Node3D2" parent="." unique_id=651832745 instance=ExtResource("5_fvacq")]
-transform = Transform3D(-0.99961495, 0, 0.027750507, 0, 1, 0, -0.027750507, 0, -0.99961495, 102.44298, -0.05065155, -67.640366)
 
 [node name="LevelOne2" parent="." unique_id=92065501 instance=ExtResource("2_0wj4k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 103.454506, -0.07286692, -92.94266)
@@ -133,3 +166,4 @@ transform = Transform3D(-0.006325604, 0, -0.99998, 0, 1, 0, 0.99998, 0, -0.00632
 [editable path="EncounterManager/Encounter1"]
 [editable path="EncounterManager/Encounter2"]
 [editable path="Path3D/PathFollow3D/Player"]
+[editable path="Path3D/PathFollow3D/Player/Head/Camera3D/SM_Prop_Lute_01"]

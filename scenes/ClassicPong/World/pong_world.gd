@@ -8,6 +8,7 @@ extends Node2D
 @onready var bloodsplatter: Node2D = $PlayerPaddle/Bloodsplatter
 @onready var player_ded: Sprite2D = $PlayerPaddle/playerDed
 
+@export var next_scene: PackedScene
 var eyelids_tween: Tween
 
 var playerScore := 0
@@ -41,11 +42,11 @@ func _on_normal_game_timer_timeout() -> void:
 func _on_pong_ball_player_hurt() -> void:
 	hurt_sound.play()
 	bloodsplatter.splatter()
-	player_ded.visible = true
+	#player_ded.visible = true
 	camera_2d.apply_shake(1.0)
 	eyelids_tween = create_tween()
 	eyelids_tween.tween_property(eyelids.material, "shader_parameter/open_amount", 0.0, 3)
-	eyelids_tween.tween_callback(_go_to_3d)
+	eyelids_tween.tween_callback(_go_to_next_scene)
 
-func _go_to_3d() -> void:
-	get_tree().change_scene_to_file("res://scenes/dungeon.tscn")
+func _go_to_next_scene() -> void:
+	get_tree().change_scene_to_packed(next_scene)

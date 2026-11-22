@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="NotTennisForTwo"
+config/name="Pong Paladin"
 run/main_scene="uid://tl2u0nipplhd"
 config/features=PackedStringArray("4.7", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://r6yfn5a7hkvf"
 
 [display]
 

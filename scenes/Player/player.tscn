@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bbr5imiyyjbpr" path="res://scenes/Player/player.gd" id="1_gqjuk"]
 [ext_resource type="PackedScene" uid="uid://be6upmxpw36i8" path="res://SM_Prop_Lute_01.fbx" id="2_c4h5g"]
 [ext_resource type="Script" uid="uid://cwgbm60wxxkai" path="res://scenes/Racket/Racket.gd" id="3_uiqp4"]
+[ext_resource type="PackedScene" uid="uid://7hy0judqantp" path="res://Assets/Models/Raqueta del jugador.glb" id="4_c4h5g"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3uqnd"]
 radius = 1.0
@@ -245,6 +246,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.5)
 transform = Transform3D(0.3322125, -0.2578348, -0.0024247877, -0.3552483, -0.21839508, 0.22437027, -0.11590239, -0.069640115, -0.69465953, 0.201, -0.33356416, -0.42691714)
 script = ExtResource("3_uiqp4")
 
+[node name="Raqueta del jugador" parent="Head/Camera3D/SM_Prop_Lute_01" unique_id=1044792077 instance=ExtResource("4_c4h5g")]
+transform = Transform3D(1.9676809, 0.14472651, -0.32754818, 0.11339081, -1.9870604, -0.19680816, -0.33967066, 0.17505713, -1.9631568, -0.16596812, 1.7492852, -0.18967187)
+
+[node name="SM_Prop_Lute_01" parent="Head/Camera3D/SM_Prop_Lute_01" index="1" unique_id=1083523901]
+visible = false
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=370463886 groups=["Actors", "Player"]]
 callback_mode_process = 0
 libraries/ = SubResource("AnimationLibrary_uiqp4")
@@ -266,3 +273,5 @@ debug_color = Color(0.9886814, 0, 0.3044817, 0.41960785)
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
+
+[editable path="Head/Camera3D/SM_Prop_Lute_01"]

@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dqfr067reihrc" path="res://Assets/Pong/Textures/Lowres/LowLowRes/Textures - Low-05.png" id="1_cp3p4"]
 [ext_resource type="PackedScene" uid="uid://gx65tgdn4m3i" path="res://scenes/Props/torch.tscn" id="1_l84pk"]
 [ext_resource type="Texture2D" uid="uid://cprrurqe1s0yf" path="res://Assets/Pong/Textures/Lowres/LowLowRes/Textures - Low-04.png" id="2_ruah6"]
+[ext_resource type="Material" uid="uid://bi8ln8qfoq26r" path="res://materials/RoofMaterial.tres" id="3_cp3p4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4667c"]
 albedo_texture = ExtResource("1_cp3p4")
@@ -39,11 +40,23 @@ material = SubResource("StandardMaterial3D_cp3p4")
 [node name="Roof" type="CSGBox3D" parent="Hallway" unique_id=1814069570]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -7)
 size = Vector3(5, 1, 20)
+material = ExtResource("3_cp3p4")
 
 [node name="Torch" parent="." unique_id=1175539354 instance=ExtResource("1_l84pk")]
-transform = Transform3D(0.87410533, 0.4855104, -0.014814691, -0.48545402, 0.8721511, -0.060719658, -0.016559385, 0.06026723, 0.9980449, -2.4191313, 2.1858234, -4.5009985)
+transform = Transform3D(0.87410533, 0.4855104, -0.014814691, -0.48545402, 0.8721511, -0.060719658, -0.016559385, 0.06026723, 0.9980449, -2.4191313, 2.1858234, -3.2892377)
 
 [node name="Torch" parent="Torch" index="0" unique_id=1181630801]
-omni_range = 5.0
+omni_range = 10.0
+
+[node name="Torch2" parent="." unique_id=951194744 instance=ExtResource("1_l84pk")]
+transform = Transform3D(-0.8660255, -0.50000006, -8.725972e-08, -0.49906746, 0.86441016, -0.06104855, 0.03052435, -0.05286955, -0.9981349, 2.1073377, 2.1858234, -7.1438785)
+
+[node name="Torch" parent="Torch2" index="0" unique_id=1181630801]
+transform = Transform3D(0.9999999, 1.7345883e-08, 1.8626451e-09, -1.2340024e-08, 0.99999994, -7.450581e-09, 0, -3.7252903e-09, 0.9999998, 0.08054304, 0.19943118, -2.6337318)
+omni_range = 10.0
+
+[node name="MeshInstance3D" parent="Torch2" index="1" unique_id=737134368]
+transform = Transform3D(1, -1.2223609e-08, 1.8626451e-09, -1.2456439e-08, 0.9999998, 0, 0, -7.450581e-09, 0.9999999, 0.080896616, -0.14011765, -2.6453066)
 
 [editable path="Torch"]
+[editable path="Torch2"]

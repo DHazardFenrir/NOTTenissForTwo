@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://bmykx80ec3i44"]
+
+[ext_resource type="Script" uid="uid://d4l75683e6ek5" path="res://cutscene.gd" id="1_amhrt"]
+[ext_resource type="PackedScene" uid="uid://bsq560ndbg7dt" path="res://scenes/dungeon.tscn" id="2_1sgok"]
+[ext_resource type="Shader" uid="uid://cwnocaobi6xtg" path="res://scenes/ClassicPong/World/eyelids.gdshader" id="2_gs1ax"]
+[ext_resource type="Texture2D" uid="uid://d2c3tctt70qab" path="res://Assets/Cutscenes/ded.png" id="3_1sgok"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1sgok"]
+shader = ExtResource("2_gs1ax")
+shader_parameter/open_amount = 0.999999977648
+shader_parameter/edge_blur_amount = 0.0499999988824
+shader_parameter/color = Color(0.1423794, 0.044523172, 0.0061786347, 1)
+
+[node name="Cutscene" type="Node2D" unique_id=268661932]
+script = ExtResource("1_amhrt")
+next_scene = ExtResource("2_1sgok")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1686362602]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_1sgok")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=659131822]
+
+[node name="Eyelids" type="ColorRect" parent="CanvasLayer" unique_id=651824012]
+material = SubResource("ShaderMaterial_1sgok")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.40055594, 0.23988971, 0.18011945, 1)
+
+[node name="CutsceneTimer" type="Timer" parent="." unique_id=2085431264]
+wait_time = 3.0
+one_shot = true

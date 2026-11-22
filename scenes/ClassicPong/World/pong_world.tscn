@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cqhkmefcqp5jv" path="res://scenes/ClassicPong/Player/paddle.tscn" id="1_huotr"]
 [ext_resource type="Script" uid="uid://cqqguunbrdb2c" path="res://scenes/ClassicPong/World/pong_world.gd" id="1_n753g"]
+[ext_resource type="PackedScene" uid="uid://bmykx80ec3i44" path="res://scenes/Cutscenes/cutscene1.tscn" id="2_0w26i"]
 [ext_resource type="Texture2D" uid="uid://qxgsfryhgfnc" path="res://Assets/Kenney/Monochrome/monochrome_tilemap.png" id="2_13blu"]
 [ext_resource type="PackedScene" uid="uid://dvj4wdo3fi7v" path="res://scenes/ClassicPong/Ball/pong_ball.tscn" id="2_j3bps"]
 [ext_resource type="Texture2D" uid="uid://lcs33euk2yj7" path="res://Assets/Pong/Pong OLD - Backgrounds.png" id="2_q4lmw"]
@@ -881,6 +882,7 @@ shader_parameter/color = Color(0.1423794, 0.044523172, 0.0061786347, 1)
 
 [node name="PongWorld" type="Node2D" unique_id=1562873341]
 script = ExtResource("1_n753g")
+next_scene = ExtResource("2_0w26i")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=949509446]
 custom_maximum_size = Vector2(2500, 2500)
@@ -962,7 +964,7 @@ shape = SubResource("RectangleShape2D_hm887")
 debug_color = Color(0.97269136, 0, 0.44259292, 0.41960785)
 
 [node name="NormalGameTimer" type="Timer" parent="." unique_id=969085250]
-wait_time = 30.0
+wait_time = 11.0
 one_shot = true
 autostart = true
 

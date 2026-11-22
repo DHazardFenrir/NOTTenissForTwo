@@ -5,6 +5,8 @@ signal encounterFinished
 
 @export var enemy_amount := 1
 @export var ball_amount := 1
+@export var enemy_texture: Texture2D
+@export var enemy_vertical_scale:= 1.0
 
 @onready var enemy_spawn_shape: CollisionShape3D = $EnemyArea/CollisionShape3D
 @onready var ball_spawn_shape: CollisionShape3D = $BallSpawner/BallCollisionShape
@@ -31,7 +33,9 @@ func spawn_enemies() -> void:
 	enemies_alive = enemy_amount
 	for i in enemy_amount:
 		var e := enemy_scene.instantiate()
+		e.sprite_texture = enemy_texture
 		e.deadEnemySignal.connect(_on_enemy_died)
+		e.scale.y = enemy_vertical_scale
 		add_child(e)  # add first...
 		e.global_position = get_random_point_in_area(enemy_spawn_shape)  # ...then place globally
 

@@ -10,6 +10,10 @@ enum HitStyle { PONG, REFLECT }
 @export var walkable_area: Area3D
 @export var difficulty: Difficulty = Difficulty.MEDIUM
 @export var health = 1
+@export var sprite_texture: Texture2D
+@onready var paladin: Node3D = $Paladin
+
+@onready var sprite_3d: Sprite3D = $Sprite3D
 @onready var hurtbox: Area3D = $Hurtbox
 
 signal deadEnemySignal
@@ -20,6 +24,11 @@ var _target_ball: Node3D
 var _recheck_timer := 0.0
 
 func _ready() -> void:
+	if sprite_texture:
+		sprite_3d.texture = sprite_texture
+		sprite_3d.visible = true
+	else:
+		paladin.visible = true
 	var col := walkable_area.get_node("CollisionShape3D") as CollisionShape3D
 	var size := (col.shape as BoxShape3D).size
 	# AABB helps with rotation, keeping the pov of the enemy
