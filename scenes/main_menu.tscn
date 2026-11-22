@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://tl2u0nipplhd"]
+
+[ext_resource type="Script" uid="uid://k3bq7vua4ukn" path="res://main_menu.gd" id="1_bqqt6"]
+[ext_resource type="Texture2D" uid="uid://dlrrpouwmrpbw" path="res://Assets/MenuAssets/BG.png" id="2_wu84c"]
+[ext_resource type="Texture2D" uid="uid://r6yfn5a7hkvf" path="res://Assets/MenuAssets/logo pong.png" id="3_8ln24"]
+[ext_resource type="Texture2D" uid="uid://c0j2l852uf6rp" path="res://Assets/MenuAssets/play 3.png" id="4_wu84c"]
+[ext_resource type="Texture2D" uid="uid://b2w1tss1merhl" path="res://Assets/MenuAssets/Quit button.png" id="5_8ln24"]
+
+[node name="MainMenu" type="Node2D" unique_id=1796821318]
+script = ExtResource("1_bqqt6")
+
+[node name="MenuBg" type="Sprite2D" parent="." unique_id=666266252]
+position = Vector2(962.28674, 539.3633)
+scale = Vector2(0.23992828, 0.24383855)
+texture = ExtResource("2_wu84c")
+
+[node name="LogoPong" type="Sprite2D" parent="MenuBg" unique_id=2105298357]
+position = Vector2(73.82718, -1145.6896)
+scale = Vector2(0.9961574, 0.9857836)
+texture = ExtResource("3_8ln24")
+
+[node name="Btn_Manager" type="Control" parent="." unique_id=1990049360]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureButton" type="TextureButton" parent="Btn_Manager" unique_id=1206719374]
+layout_mode = 0
+offset_left = 767.00006
+offset_top = 615.0
+offset_right = 1689.0
+offset_bottom = 890.0
+scale = Vector2(0.52000064, 0.4800012)
+texture_normal = ExtResource("4_wu84c")
+stretch_mode = 0
+
+[node name="Quit" type="TextureButton" parent="Btn_Manager" unique_id=1324754214]
+layout_mode = 0
+offset_left = 861.00006
+offset_top = 782.99994
+offset_right = 1783.0
+offset_bottom = 1058.0
+scale = Vector2(0.31999755, 0.36)
+texture_normal = ExtResource("5_8ln24")
+
+[connection signal="pressed" from="Btn_Manager/TextureButton" to="." method="_on_texture_button_pressed"]
