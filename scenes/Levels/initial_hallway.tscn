@@ -2,9 +2,18 @@
 
 [ext_resource type="PackedScene" uid="uid://gx65tgdn4m3i" path="res://scenes/Props/torch.tscn" id="1_l84pk"]
 [ext_resource type="Texture2D" uid="uid://wdti13eqhx0l" path="res://Assets/Pong/Textures/piso_texture.png" id="1_v3e15"]
+[ext_resource type="Texture2D" uid="uid://b82btpkauf5bt" path="res://Assets/Pong/Textures/Walls.png" id="2_7b84h"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4667c"]
 albedo_texture = ExtResource("1_v3e15")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gqjuk"]
+albedo_texture = ExtResource("2_7b84h")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cp3p4"]
+albedo_texture = ExtResource("2_7b84h")
 uv1_triplanar = true
 
 [node name="InitialHallway" type="Node3D" unique_id=1894744364]
@@ -20,10 +29,12 @@ material = SubResource("StandardMaterial3D_4667c")
 [node name="WallLeft" type="CSGBox3D" parent="Hallway" unique_id=2115993304]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2, -7)
 size = Vector3(1, 5, 20)
+material = SubResource("StandardMaterial3D_gqjuk")
 
 [node name="WallRight" type="CSGBox3D" parent="Hallway" unique_id=834555633]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2, -7)
 size = Vector3(1, 5, 20)
+material = SubResource("StandardMaterial3D_cp3p4")
 
 [node name="Roof" type="CSGBox3D" parent="Hallway" unique_id=1814069570]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -7)

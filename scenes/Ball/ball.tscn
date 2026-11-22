@@ -1,12 +1,17 @@
 [gd_scene format=3 uid="uid://b52p6bx8nl548"]
 
 [ext_resource type="Script" uid="uid://b8t0t6ycj3ccn" path="res://scenes/Ball/ball.gd" id="1_7s4qf"]
+[ext_resource type="Texture2D" uid="uid://n5eh6vl3o0rv" path="res://Assets/Kenney/retro_textures/roof_thatch_center.png" id="2_jsqxx"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_muyyy"]
 friction = 0.0
 bounce = 1.0
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7b84h"]
+albedo_texture = ExtResource("2_jsqxx")
+
 [sub_resource type="SphereMesh" id="SphereMesh_3uqnd"]
+material = SubResource("StandardMaterial3D_7b84h")
 radius = 0.15
 height = 0.3
 
