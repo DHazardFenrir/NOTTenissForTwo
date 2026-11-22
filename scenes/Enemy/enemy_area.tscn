@@ -3,7 +3,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_hm887"]
 size = Vector3(10, 2, 5)
 
-[node name="EnemyManager" type="Node3D" unique_id=287417025]
+[node name="EnemyArea" type="Node3D" unique_id=287417025]
 
 [node name="Area3D" type="Area3D" parent="." unique_id=1241358752]
 

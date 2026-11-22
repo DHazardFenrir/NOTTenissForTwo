@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cakiylf2y2xv4"]
+
+[ext_resource type="Script" uid="uid://dgxaiw583y2gq" path="res://scenes/Levels/encounter.gd" id="1_ljgs4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hm887"]
+size = Vector3(5, 1, 1)
+
+[node name="Encounter" type="Node3D" unique_id=2866719 node_paths=PackedStringArray("enemy_area")]
+script = ExtResource("1_ljgs4")
+enemy_amount = 2
+enemy_area = NodePath("EnemyArea")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1027971446]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.195869)
+
+[node name="EnemyArea" type="Area3D" parent="." unique_id=1433872284]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyArea" unique_id=1867965822]
+shape = SubResource("BoxShape3D_hm887")
