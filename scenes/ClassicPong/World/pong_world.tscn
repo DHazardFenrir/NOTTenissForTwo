@@ -962,7 +962,7 @@ shape = SubResource("RectangleShape2D_hm887")
 debug_color = Color(0.97269136, 0, 0.44259292, 0.41960785)
 
 [node name="NormalGameTimer" type="Timer" parent="." unique_id=969085250]
-wait_time = 20.0
+wait_time = 30.0
 one_shot = true
 autostart = true
 

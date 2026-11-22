@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://ejdqv2b1g4fb"]
+
+[ext_resource type="PackedScene" uid="uid://be6upmxpw36i8" path="res://SM_Prop_Lute_01.fbx" id="1_d608r"]
+
+[node name="Racket" unique_id=1832657628 instance=ExtResource("1_d608r")]

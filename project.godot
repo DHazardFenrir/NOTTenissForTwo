@@ -26,6 +26,9 @@ window/stretch/aspect="expand"
 
 PongPaddle="Paddles in Pong world"
 PongOut="The outside limits for pong (for scoring)"
+Player="Player character (in 3d)"
+Actors="Nodes that are either players, enemies, bosses, npc's."
+Ball="Ball objects (in 3d)"
 
 [input]
 

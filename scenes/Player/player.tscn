@@ -1,0 +1,152 @@
+[gd_scene format=3 uid="uid://bdcbl87t7lit2"]
+
+[ext_resource type="Script" uid="uid://bbr5imiyyjbpr" path="res://scenes/Player/player.gd" id="1_gqjuk"]
+[ext_resource type="PackedScene" uid="uid://be6upmxpw36i8" path="res://SM_Prop_Lute_01.fbx" id="2_c4h5g"]
+[ext_resource type="Script" uid="uid://cwgbm60wxxkai" path="res://scenes/Racket/Racket.gd" id="3_uiqp4"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3uqnd"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_3uqnd"]
+
+[sub_resource type="Animation" id="Animation_gqjuk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/Camera3D/SM_Prop_Lute_01:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.201, -0.33356416, -0.42691714)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head/Camera3D/SM_Prop_Lute_01:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.3124139, -3.138102, -2.2985985)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:swinging")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hitbox:monitoring")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_c4h5g"]
+resource_name = "Swing"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/Camera3D/SM_Prop_Lute_01:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2039536, 0.6011264, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.201, -0.33356416, -0.42691714), Vector3(0.18058494, -0.21979785, -0.50852054), Vector3(-0.1690087, -0.27655947, -0.44486892), Vector3(0.201, -0.33356416, -0.42691714)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head/Camera3D/SM_Prop_Lute_01:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2039536, 0.6011264, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.3124139, -3.138102, -2.2985985), Vector3(0.53482676, -2.7416782, -2.4174054), Vector3(0.3856244, -1.8984424, -1.729408), Vector3(-0.3124139, -3.138102, -2.2985985)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:swinging")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hitbox:monitoring")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uiqp4"]
+_data = {
+&"RESET": SubResource("Animation_gqjuk"),
+&"Swing": SubResource("Animation_c4h5g")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5y5st"]
+size = Vector3(3, 1.5, 2)
+
+[node name="Player" type="CharacterBody3D" unique_id=907270912 groups=["Actors", "Player"]]
+script = ExtResource("1_gqjuk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=153138377]
+shape = SubResource("CapsuleShape3D_3uqnd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2111521639]
+mesh = SubResource("CapsuleMesh_3uqnd")
+
+[node name="Head" type="Node3D" parent="." unique_id=1588145066]
+
+[node name="Camera3D" type="Camera3D" parent="Head" unique_id=1592888888]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.5)
+
+[node name="SM_Prop_Lute_01" parent="Head/Camera3D" unique_id=1832657628 instance=ExtResource("2_c4h5g")]
+transform = Transform3D(0.33221257, -0.2578348, -0.0024247882, -0.35524836, -0.21839508, 0.22437032, -0.1159024, -0.069640115, -0.6946597, 0.201, -0.33356416, -0.42691714)
+script = ExtResource("3_uiqp4")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=370463886 groups=["Actors", "Player"]]
+callback_mode_process = 0
+libraries/ = SubResource("AnimationLibrary_uiqp4")
+
+[node name="Hitbox" type="Area3D" parent="." unique_id=2120845986 groups=["Actors", "Player"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46055126, -1.7616208)
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" unique_id=841061637 groups=["Actors", "Player"]]
+shape = SubResource("BoxShape3D_5y5st")
+debug_color = Color(0.57812035, 0.9980262, 0.32417992, 0.41960785)
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
