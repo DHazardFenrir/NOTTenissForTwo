@@ -19,6 +19,7 @@ var stopped = false
 var next_stop = 0
 var yaw = 0.0
 var health = 5
+var blocking = false
 var double_swing = false
 
 
@@ -27,30 +28,8 @@ func _ready():
 	health = max_health
 	yaw = follow.global_rotation.y
 
-enum HitStyle { PONG, REFLECT }
-@export var hit_style: HitStyle = HitStyle.REFLECT
-@export var paddle_half_width := 1.0    # PONG: distance from center to edge of your hitbox
-@export var max_bounce_angle := 60.0    # PONG: angle (degrees) when hit at the very edge
-
-var blocking:= false
-var next_is_double:= false
 
 func _physics_process(delta):
-	# Girar con izquierda/derecha
-	#var turn := Input.get_axis("right", "left")
-	#rotate_y(deg_to_rad(turn * turn_speed * delta))
-
-	# "Adelante" = hacia donde mira la cámara (sin inclinación)
-	#var cam := get_viewport().get_camera_3d()
-	#var fwd := -cam.global_basis.z
-	#fwd.y = 0
-	#fwd = fwd.normalized()
-
-	var input_dir : Vector2 = Input.get_vector("left", "right", "up", "down")
-	var direction: Vector3 = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	
-	velocity.x = direction.x * speed
-	velocity.z = direction.z * speed
 	if not stopped:
 		follow.progress += speed * delta
 
@@ -102,12 +81,8 @@ func _physics_process(delta):
 func unlock():
 	stopped = false
 
-func take_damage(amount):
-	if blocking:
-		return
 
-
-func _on_hitbox_body_entered(body: Node3D):
+func _on_hitbox_body_entered(body):
 	if not body.is_in_group("ball"):
 		return
 
@@ -124,57 +99,14 @@ func _on_hitbox_body_entered(body: Node3D):
 	body.linear_velocity = Vector3.ZERO
 	body.apply_central_impulse(dir.normalized() * power)
 	body.reflected = true
-	if not body.is_in_group("Balls"):
+
+
+func take_damage(amount):
+	if blocking:
 		return
-
-	# Player's forward and right, flattened so they're level with the floor
-	var forward := -global_basis.z
-	forward.y = 0.0
-	forward = forward.normalized()
-	var right := global_basis.x
-	right.y = 0.0
-	right = right.normalized()
-
-	match hit_style:
-		HitStyle.REFLECT:
-			# Mirror the ball's movement, breakout style
-			var incoming: Vector3 = body.linear_velocity
-			incoming.y = 0.0
-			dir = incoming.bounce(forward)
-			# Fallback if the ball was barely moving or already heading away
-			if dir.length() < 0.01 or dir.dot(forward) <= 0.0:
-				dir = forward
-
-		HitStyle.PONG:
-			# -1 = hit on the left edge, 0 = center, 1 = right edge
-			var offset := (body.global_position - global_position).dot(right)
-			var t: float = clamp(offset / paddle_half_width, -1.0, 1.0)
-			dir = forward.rotated(Vector3.UP, -t * deg_to_rad(max_bounce_angle))
-
-	dir = dir.normalized()
-	body.linear_velocity = Vector3.ZERO  # stop it so the hit feels consistent
-	body.apply_central_impulse(dir * swing_power)
-	body.reflected = true
-	
-	## TODO: Not sure where amount comes from
-	## HARDCODEADO
-	var amount = 1
-	## FIX SOON
-	health -= amount
-	print("Vida: ", health)
-
-	if health <= 0:
-		get_tree().reload_current_scene()
-	if  blocking:
-		return
-
 	health -= amount
 	print("Health: ", health)
-
 	if health <= 0:
 		get_tree().reload_current_scene()
-		return
 
-	
-	await get_tree().create_timer(0.8).timeout
 	
