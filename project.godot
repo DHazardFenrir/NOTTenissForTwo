@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="NotTennisForTwo"
-run/main_scene="uid://bsq560ndbg7dt"
+run/main_scene="uid://tl2u0nipplhd"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -28,6 +28,7 @@ PongPaddle="Paddles in Pong world"
 PongOut="The outside limits for pong (for scoring)"
 Player="Player character (in 3d)"
 Actors="Nodes that are either players, enemies, bosses, npc's."
+Ball="Ball objects (in 3d)"
 Balls="Ball objects (in 3d)"
 
 [input]
