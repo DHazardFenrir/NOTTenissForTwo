@@ -1,11 +1,32 @@
 extends CharacterBody3D
 
-@export var speed := 6.0
-@export var turn_speed := 150.0   # grados por segundo
-@export var gravity := 20.0
-@export var swinging := false
-@export var swingPower := 1.0
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
+signal reached_stop(index)
+
+@export var speed = 4.0
+@export var turn_speed = 6.0
+@export var dodge_speed = 5.0
+@export var dodge_side = 3.0
+@export var dodge_back = 1.5
+@export var swing_power = 15.0
+@export var block_power = 8.0
+@export var max_health = 5
+@export var stops = [16.13, 96.72, 193.0, 254.13, 366.48, 473.18]
+
+@onready var follow = get_parent()
+@onready var anim = $AnimationPlayer
+
+var stopped = false
+var next_stop = 0
+var yaw = 0.0
+var health = 5
+var blocking = false
+var double_swing = false
+
+
+func _ready():
+	add_to_group("player")
+	health = max_health
+	yaw = follow.global_rotation.y
 
 enum HitStyle { PONG, REFLECT }
 @export var hit_style: HitStyle = HitStyle.REFLECT
@@ -32,37 +53,81 @@ func _physics_process(delta):
 	velocity.x = direction.x * speed
 	velocity.z = direction.z * speed
 
-	if not is_on_floor():
-		velocity.y -= gravity * delta
-	
-	if Input.is_action_just_pressed("attack"):
-		if not animation_player.is_playing() and not blocking:
-			if next_is_double:
-				_double_swing()
-			else:
-				_swing()
-			next_is_double = not next_is_double
+func _physics_process(delta):
+	if not stopped:
+		follow.progress += speed * delta
+
+		if next_stop < stops.size() and follow.progress >= stops[next_stop]:
+			follow.progress = stops[next_stop]
+			stopped = true
+			reached_stop.emit(next_stop)
+			print("Stop ", next_stop)
+			next_stop += 1
+
+	if stopped:
+		if Input.is_action_pressed("left"):
+			position.x -= dodge_speed * delta
+		if Input.is_action_pressed("right"):
+			position.x += dodge_speed * delta
+		if Input.is_action_pressed("down"):
+			position.z += dodge_speed * delta
+		if Input.is_action_pressed("up"):
+			position.z -= dodge_speed * delta
+
+		position.x = clamp(position.x, -dodge_side, dodge_side)
+		position.z = clamp(position.z, 0, dodge_back)
+	else:
+		position.x = move_toward(position.x, 0, dodge_speed * delta)
+		position.z = move_toward(position.z, 0, dodge_speed * delta)
+
+	yaw = lerp_angle(yaw, follow.global_rotation.y, turn_speed * delta)
+	rotation.y = yaw - follow.global_rotation.y
+
+	if Input.is_action_just_pressed("attack") and not anim.is_playing() and not blocking:
+		if double_swing:
+			anim.play("Swing2")
+		else:
+			anim.play("Swing")
+		double_swing = not double_swing
 
 	if Input.is_action_just_pressed("block"):
-		_block()
+		blocking = true
+		anim.play("Block")
+
 	if Input.is_action_just_released("block"):
-		_unblock()
-	
-	move_and_slide()
+		blocking = false
+		anim.play_backwards("Block")
 
-func _swing() -> void:
-	animation_player.play("Swing")
-	
+	if stopped and Input.is_action_just_pressed("ui_accept"):
+		unlock()
 
-func _double_swing()-> void:
-	animation_player.play("Swing2")
-	
 
-func _block()-> void:
-	animation_player.play("Block")
+func unlock():
+	stopped = false
 
-func _unblock()-> void:
-	animation_player.play("RESET")
+
+func _on_hitbox_body_entered(body):
+	if not body.is_in_group("ball"):
+		return
+
+	var power = 0.0
+	if blocking:
+		power = block_power
+	elif anim.current_animation == "Swing" or anim.current_animation == "Swing2":
+		power = swing_power
+	else:
+		return
+
+	var dir = -global_basis.z
+	dir.y = 0.2
+	body.linear_velocity = Vector3.ZERO
+	body.apply_central_impulse(dir.normalized() * power)
+	body.reflected = true
+
+
+func take_damage(amount):
+	if blocking:
+		return
 
 func _on_hitbox_body_entered(body: Node3D) -> void:
 	print(body.get_groups())
@@ -99,3 +164,21 @@ func _on_hitbox_body_entered(body: Node3D) -> void:
 	body.linear_velocity = Vector3.ZERO  # stop it so the hit feels consistent
 	body.apply_central_impulse(dir * swingPower)
 	body.reflected = true
+	health -= amount
+	print("Vida: ", health)
+
+	if health <= 0:
+		get_tree().reload_current_scene()
+	if  blocking:
+		return
+
+	health -= amount
+	print("Health: ", health)
+
+	if health <= 0:
+		get_tree().reload_current_scene()
+		return
+
+	
+	await get_tree().create_timer(0.8).timeout
+	
