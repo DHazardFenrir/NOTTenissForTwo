@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://baty7brveqahv"]
+
+[ext_resource type="PackedScene" uid="uid://gx65tgdn4m3i" path="res://scenes/Props/torch.tscn" id="1_bjorx"]
+[ext_resource type="PackedScene" uid="uid://bdcbl87t7lit2" path="res://scenes/Player/player.tscn" id="1_i0tn6"]
+[ext_resource type="PackedScene" uid="uid://d3udu2hwx0aak" path="res://scenes/Levels/initial_hallway.tscn" id="1_t45hr"]
+[ext_resource type="PackedScene" uid="uid://dtxkmxyxskx7k" path="res://scenes/Enemy/enemy_manager.tscn" id="2_n1alr"]
+[ext_resource type="PackedScene" uid="uid://dt4exijh73hko" path="res://scenes/Enemy/enemy.tscn" id="3_t45hr"]
+[ext_resource type="PackedScene" uid="uid://b52p6bx8nl548" path="res://scenes/Ball/ball.tscn" id="5_n1alr"]
+[ext_resource type="PackedScene" uid="uid://c0kobsfpf1uqd" path="res://scenes/UI/hud.tscn" id="7_wtasy"]
+
+[node name="InitialHallway" type="Node3D" unique_id=1894744364]
+
+[node name="InitialHallway" parent="." unique_id=1995050519 instance=ExtResource("1_t45hr")]
+
+[node name="Player" parent="." unique_id=907270912 instance=ExtResource("1_i0tn6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7818625, 0)
+hit_style = 0
+
+[node name="EnemyManager" parent="." unique_id=287417025 instance=ExtResource("2_n1alr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7501097, -12.656828)
+
+[node name="Area3D" parent="EnemyManager" index="0" unique_id=1241358752]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="Enemy" parent="EnemyManager" unique_id=1933570996 node_paths=PackedStringArray("walkable_area") instance=ExtResource("3_t45hr")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+walkable_area = NodePath("../Area3D")
+difficulty = 0
+
+[node name="Torch" parent="." unique_id=1175539354 instance=ExtResource("1_bjorx")]
+transform = Transform3D(0.87410533, 0.4855104, -0.014814691, -0.48545402, 0.8721511, -0.060719658, -0.016559385, 0.06026723, 0.9980449, -2.4191313, 2.1858234, -4.5009985)
+
+[node name="Torch" parent="Torch" index="0" unique_id=1181630801]
+omni_range = 5.0
+
+[node name="Torch2" parent="." unique_id=102207461 instance=ExtResource("1_bjorx")]
+transform = Transform3D(0.87410533, 0.4855104, -0.014814691, -0.48545402, 0.8721511, -0.060719658, -0.016559385, 0.06026723, 0.9980449, -2.4191313, 2.1858234, -13.396165)
+
+[node name="Torch" parent="Torch2" index="0" unique_id=1181630801]
+omni_range = 5.0
+
+[node name="Ball" parent="." unique_id=2122994294 instance=ExtResource("5_n1alr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0219307, -2.4010906)
+
+[node name="HUD" parent="." unique_id=1101074698 instance=ExtResource("7_wtasy")]
+
+[editable path="EnemyManager"]
+[editable path="EnemyManager/Enemy"]
+[editable path="Torch"]
+[editable path="Torch2"]

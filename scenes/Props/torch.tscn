@@ -1,6 +1,12 @@
 [gd_scene format=3 uid="uid://gx65tgdn4m3i"]
 
+[ext_resource type="Texture2D" uid="uid://b51xigutc74au" path="res://Assets/Kenney/retro_textures/window_square_closed.png" id="1_v5c2g"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3751q"]
+albedo_texture = ExtResource("1_v5c2g")
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_hm887"]
+material = SubResource("StandardMaterial3D_3751q")
 top_radius = 0.07
 bottom_radius = 0.03
 height = 0.5

@@ -1,35 +1,11 @@
 [gd_scene format=3 uid="uid://cdi8w7vb3g7tf"]
 
-[ext_resource type="PackedScene" uid="uid://dt4exijh73hko" path="res://scenes/Enemy/enemy.tscn" id="1_r41vt"]
+[ext_resource type="PackedScene" uid="uid://d3udu2hwx0aak" path="res://scenes/Levels/initial_hallway.tscn" id="1_3xjen"]
 [ext_resource type="PackedScene" uid="uid://gx65tgdn4m3i" path="res://scenes/Props/torch.tscn" id="2_3xjen"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3xjen"]
-albedo_color = Color(1, 0.49019608, 0.4862745, 1)
 
 [node name="LevelOne" type="Node3D" unique_id=1029602578]
 
-[node name="Enemy" parent="." unique_id=1933570996 instance=ExtResource("1_r41vt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7200755, 0)
-
-[node name="Hallway" type="CSGCombiner3D" parent="." unique_id=1961109250]
-material_override = SubResource("StandardMaterial3D_3xjen")
-use_collision = true
-
-[node name="Floor" type="CSGBox3D" parent="Hallway" unique_id=2036882297]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7)
-size = Vector3(5, 0.5, 20)
-
-[node name="WallLeft" type="CSGBox3D" parent="Hallway" unique_id=128805104]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2, -7)
-size = Vector3(1, 5, 20)
-
-[node name="WallRight" type="CSGBox3D" parent="Hallway" unique_id=440237358]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2, -7)
-size = Vector3(1, 5, 20)
-
-[node name="Roof" type="CSGBox3D" parent="Hallway" unique_id=556754929]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -7)
-size = Vector3(5, 1, 20)
+[node name="InitialHallway" parent="." unique_id=1894744364 instance=ExtResource("1_3xjen")]
 
 [node name="Node3D" type="Node3D" parent="." unique_id=490804425]
 
