@@ -53,3 +53,4 @@ scale = Vector2(0.31999755, 0.36)
 texture_normal = ExtResource("5_8ln24")
 
 [connection signal="pressed" from="Btn_Manager/TextureButton" to="." method="_on_texture_button_pressed"]
+[connection signal="pressed" from="Btn_Manager/Quit" to="." method="_on_quit_pressed"]
