@@ -12,9 +12,12 @@ enum HitStyle { PONG, REFLECT }
 @export var health = 1
 @export var sprite_texture: Texture2D
 @onready var paladin: Node3D = $Paladin
+@onready var deathsound: AudioStreamPlayer3D = $deathsound
 
 @onready var sprite_3d: Sprite3D = $Sprite3D
 @onready var hurtbox: Area3D = $Hurtbox
+
+var death_particles := preload("res://scenes/particles/explosion3d.tscn")
 
 signal deadEnemySignal
 
@@ -143,6 +146,11 @@ func _enemy_take_damage(value = 1) -> void:
 func _enemy_death() -> void:
 	is_dead = true
 	hurtbox.set_deferred("monitoring", false)
+	deathsound.play()
+	var fx := death_particles.instantiate()
+	get_parent().add_child(fx)
+	fx.global_position = global_position
+	
 	deadEnemySignal.emit()
 	queue_free()
 	

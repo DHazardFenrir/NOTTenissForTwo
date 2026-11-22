@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://tl2u0nipplhd" path="res://scenes/main_menu.tscn" id="2_l8h3d"]
 [ext_resource type="Texture2D" uid="uid://bihgb335oxajd" path="res://Assets/Cutscenes/hospital.png" id="2_ni7wc"]
 [ext_resource type="Shader" uid="uid://cwnocaobi6xtg" path="res://scenes/ClassicPong/World/eyelids.gdshader" id="4_ifnbt"]
+[ext_resource type="AudioStream" uid="uid://bb2xytvb2rai4" path="res://Assets/Kenney/SFX/you_win.ogg" id="5_bxf46"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1sgok"]
 shader = ExtResource("4_ifnbt")
@@ -62,5 +63,10 @@ offset_right = 1753.0
 offset_bottom = 476.0
 theme_override_font_sizes/font_size = 60
 text = "Back to start"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=202368444]
+stream = ExtResource("5_bxf46")
+volume_db = -15.0
+autoplay = true
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

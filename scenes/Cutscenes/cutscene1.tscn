@@ -4,6 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://bsq560ndbg7dt" path="res://scenes/dungeon.tscn" id="2_1sgok"]
 [ext_resource type="Shader" uid="uid://cwnocaobi6xtg" path="res://scenes/ClassicPong/World/eyelids.gdshader" id="2_gs1ax"]
 [ext_resource type="Texture2D" uid="uid://d2c3tctt70qab" path="res://Assets/Cutscenes/ded.png" id="3_1sgok"]
+[ext_resource type="AudioStream" uid="uid://dxpri86mi7ix5" path="res://Assets/Sound Effects/scream.mp3" id="5_ye7ht"]
+[ext_resource type="LabelSettings" uid="uid://cwvqnsvdj8gap" path="res://scenes/Cutscenes/cutscenelabelsettings.tres" id="6_eotf1"]
+[ext_resource type="AudioStream" uid="uid://bk8dva7r8237b" path="res://Assets/Sound Effects/energy charginng.wav" id="7_vye2w"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1sgok"]
 shader = ExtResource("2_gs1ax")
@@ -38,5 +41,47 @@ grow_vertical = 2
 color = Color(0.40055594, 0.23988971, 0.18011945, 1)
 
 [node name="CutsceneTimer" type="Timer" parent="." unique_id=2085431264]
-wait_time = 3.0
+wait_time = 2.0
 one_shot = true
+
+[node name="scream" type="AudioStreamPlayer2D" parent="." unique_id=894937809]
+position = Vector2(1251, 380)
+stream = ExtResource("5_ye7ht")
+pitch_scale = 1.77
+attenuation = 9.513657
+
+[node name="Screamtimer" type="Timer" parent="." unique_id=1817490970]
+wait_time = 0.75
+one_shot = true
+autostart = true
+
+[node name="defeated" type="Label" parent="." unique_id=1013568697]
+offset_left = 757.0
+offset_top = 28.0
+offset_right = 1332.0
+offset_bottom = 111.0
+text = "Defeated so easily..."
+label_settings = ExtResource("6_eotf1")
+
+[node name="getreal" type="Label" parent="." unique_id=1806398003]
+offset_left = 786.0
+offset_top = 183.0
+offset_right = 1288.0
+offset_bottom = 266.0
+text = "Time to get real..."
+label_settings = ExtResource("6_eotf1")
+
+[node name="rtxon" type="Label" parent="." unique_id=668191478]
+offset_left = 874.0
+offset_top = 422.0
+offset_right = 1126.0
+offset_bottom = 505.0
+text = "RTX: ON!"
+label_settings = ExtResource("6_eotf1")
+
+[node name="boom" type="AudioStreamPlayer2D" parent="." unique_id=863932599]
+stream = ExtResource("7_vye2w")
+volume_db = -10.0
+pitch_scale = 7.3
+
+[connection signal="timeout" from="Screamtimer" to="." method="_on_screamtimer_timeout"]

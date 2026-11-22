@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b4ucktpephtsx"]
 
-[ext_resource type="Script" path="res://ball.gd" id="1_7s4qf"]
+[ext_resource type="Script" uid="uid://b8t0t6ycj3ccn" path="res://scenes/Ball/ball.gd" id="1_7s4qf"]
+[ext_resource type="AudioStream" uid="uid://bjyejymlnlrcx" path="res://Assets/Sound Effects/Hit ball.wav" id="2_cxlvu"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_um4cd"]
 friction = 0.2
@@ -27,3 +28,10 @@ mesh = SubResource("SphereMesh_3uqnd")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2099307524]
 shape = SubResource("SphereShape3D_3uqnd")
+
+[node name="Bounce" type="AudioStreamPlayer3D" parent="." unique_id=753793557]
+stream = ExtResource("2_cxlvu")
+volume_db = 10.0
+pitch_scale = 0.63
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

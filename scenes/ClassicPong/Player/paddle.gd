@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal goingSuper
+
 @export var SPEED = 600.0
 @export var isPlayer = true
 @export var playerPaddle: CharacterBody2D
@@ -50,5 +52,6 @@ func _enemy_movement(delta: float) -> void:
 
 func enable_super_mode() -> void:
 	super_mode_sound.play()
+	goingSuper.emit()
 	superMode = true
 	

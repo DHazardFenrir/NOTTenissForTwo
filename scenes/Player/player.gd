@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
 signal reached_stop(index)
+signal playerHurt
 
 @export var speed = 4.0
 @export var turn_speed = 6.0
@@ -11,6 +12,7 @@ signal reached_stop(index)
 @export var block_power = 8.0
 @export var max_health = 5
 @export var stops = [16.13, 96.72, 193.0, 254.13, 366.48, 473.18]
+@onready var hurtsound: AudioStreamPlayer3D = $Hurtsound
 
 @onready var follow = get_parent()
 @onready var anim = $AnimationPlayer
@@ -101,8 +103,12 @@ func _on_hitbox_body_entered(body):
 
 
 func take_damage(amount = 1):
+	
 	if blocking:
 		return
+	hurtsound.pitch_scale = randf_range(1.5, 2.2)
+	playerHurt.emit()
+	hurtsound.play()
 	health -= amount
 	print("Health: ", health)
 	if health <= 0:

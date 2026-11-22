@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cyst3uttsfhnw"
+path="res://.godot/imported/BreakbeatChips.wav-b170dea19706c9dbc952edb66aa57548.sample"
+
+[deps]
+
+source_file="res://Assets/Music/Pong Paladin_/BreakbeatChips.wav"
+dest_files=["res://.godot/imported/BreakbeatChips.wav-b170dea19706c9dbc952edb66aa57548.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=1278900
+compress/mode=2

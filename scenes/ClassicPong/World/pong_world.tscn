@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://ba736lqjutui7" path="res://Assets/Pong/yamcha_dead_by_alexelz_d9xiyk9-fullview.png" id="7_457dm"]
 [ext_resource type="AudioStream" uid="uid://bafav4t3bu405" path="res://Assets/Kenney/SFX/explosion2.ogg" id="8_lgfu1"]
 [ext_resource type="Shader" uid="uid://cwnocaobi6xtg" path="res://scenes/ClassicPong/World/eyelids.gdshader" id="10_kvlk6"]
+[ext_resource type="AudioStream" uid="uid://d0aewlvvtkiqp" path="res://Assets/Music/old PONG/crystal_caverns_loopable.wav" id="14_hildg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n753g"]
 texture = ExtResource("2_13blu")
@@ -987,6 +988,12 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.40055594, 0.23988971, 0.18011945, 1)
 
+[node name="Music" type="AudioStreamPlayer2D" parent="." unique_id=1489260385]
+stream = ExtResource("14_hildg")
+volume_db = -20.0
+autoplay = true
+
+[connection signal="goingSuper" from="EnemyPaddle" to="." method="_on_enemy_paddle_going_super"]
 [connection signal="enemyScored" from="PongBall" to="." method="_on_pong_ball_enemy_scored"]
 [connection signal="playerHurt" from="PongBall" to="." method="_on_pong_ball_player_hurt"]
 [connection signal="playerScored" from="PongBall" to="." method="_on_pong_ball_player_scored"]

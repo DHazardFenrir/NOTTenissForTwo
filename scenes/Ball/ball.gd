@@ -1,6 +1,7 @@
 extends RigidBody3D
 var reflected:= false
 var thrower: Node3D
+@onready var bounce: AudioStreamPlayer3D = $Bounce
 
 @export var damage:= 1
 
@@ -15,3 +16,7 @@ func ball_death() -> void:
 		return
 	queue_free()       # mark as dying FIRST
 	ballDeath.emit()
+
+
+func _on_body_entered(body: Node) -> void:
+	bounce.play()

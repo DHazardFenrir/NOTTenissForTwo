@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ctrimbpid2dgw"
+path="res://.godot/imported/Ball bouncing 3 times.wav-af5e8774ea59116a7c493b8fa563588d.sample"
+
+[deps]
+
+source_file="res://Assets/Sound Effects/Ball bouncing 3 times.wav"
+dest_files=["res://.godot/imported/Ball bouncing 3 times.wav-af5e8774ea59116a7c493b8fa563588d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,50 +1,61 @@
 [gd_scene format=3 uid="uid://c0kobsfpf1uqd"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5y5st"]
-bg_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mqya5"]
-bg_color = Color(0.8386639, 0, 0.14630887, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_hm887"]
+[ext_resource type="Script" uid="uid://dvag7v87pm7qd" path="res://scenes/UI/hud.gd" id="1_0jeyp"]
+[ext_resource type="Texture2D" uid="uid://ditusm0jpn04h" path="res://Assets/UI/Bar/New Pong-04.png" id="1_y5tme"]
+[ext_resource type="Texture2D" uid="uid://brb7651bhakvw" path="res://Assets/UI/Frame for doll icon and status/New Pong-07.png" id="2_18exe"]
+[ext_resource type="Texture2D" uid="uid://bkr30lgcjvhbw" path="res://Assets/Icons/Mainchar_nuetral.png" id="3_0jeyp"]
+[ext_resource type="Texture2D" uid="uid://b1kfhtne8e6pt" path="res://Assets/Icons/Main_character_Agony.png" id="5_cg4gw"]
+[ext_resource type="Texture2D" uid="uid://b1sdkq6gs73xv" path="res://Assets/Icons/Main_character_slumped.png" id="6_cg4gw"]
 
 [node name="HUD" type="CanvasLayer" unique_id=1101074698]
+script = ExtResource("1_0jeyp")
 
-[node name="Panel" type="Panel" parent="." unique_id=1526076005]
-offset_right = 200.0
-offset_bottom = 40.0
+[node name="TextureRect" type="TextureRect" parent="." unique_id=63951788]
+offset_left = -216.00002
+offset_top = 924.0
+offset_right = 7784.0
+offset_bottom = 1858.0
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_y5tme")
 
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=833252382]
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -27.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="TextureRect3" type="TextureRect" parent="." unique_id=1800932698]
+offset_left = 719.0
+offset_top = 915.0
+offset_right = 2569.0
+offset_bottom = 1729.0
+scale = Vector2(0.33, 0.33)
+texture = ExtResource("2_18exe")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=354857227]
-layout_mode = 2
+[node name="characterIcon" type="TextureRect" parent="TextureRect3" unique_id=1189975309]
+layout_mode = 0
+offset_left = 666.6668
+offset_top = -533.3331
+offset_right = 1866.6667
+offset_bottom = 666.6669
+texture = ExtResource("3_0jeyp")
 
-[node name="Container" type="Container" parent="MarginContainer/HBoxContainer" unique_id=1494503706]
-layout_mode = 2
+[node name="characterIconHurting" type="TextureRect" parent="TextureRect3" unique_id=50391545]
+layout_mode = 0
+offset_left = 666.6668
+offset_top = -533.3331
+offset_right = 1866.6667
+offset_bottom = 666.6669
+texture = ExtResource("5_cg4gw")
 
-[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/Container" unique_id=1823860258]
-custom_minimum_size = Vector2(300, 24)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/background = SubResource("StyleBoxFlat_5y5st")
-theme_override_styles/fill = SubResource("StyleBoxFlat_mqya5")
+[node name="characterIconHurt" type="TextureRect" parent="TextureRect3" unique_id=769109920]
+layout_mode = 0
+offset_left = 666.6668
+offset_top = -533.3331
+offset_right = 1866.6667
+offset_bottom = 666.6669
+texture = ExtResource("6_cg4gw")
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/Container" unique_id=268539614]
-layout_mode = 2
-text = "HP"
-label_settings = SubResource("LabelSettings_hm887")
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=1332929751]
+offset_right = 4.0
+offset_bottom = 27.0
 
-[node name="Control" type="Control" parent="MarginContainer/HBoxContainer" unique_id=1875392986]
-layout_mode = 2
-size_flags_horizontal = 3
+[node name="iconTimer" type="Timer" parent="." unique_id=1769633259]
+wait_time = 0.5
+one_shot = true
 
-[node name="Control2" type="Control" parent="MarginContainer/HBoxContainer" unique_id=2091598925]
-layout_mode = 2
-size_flags_horizontal = 3
+[connection signal="timeout" from="iconTimer" to="." method="_on_icon_timer_timeout"]

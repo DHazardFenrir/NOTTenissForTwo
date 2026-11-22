@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dtxkmxyxskx7k" path="res://scenes/Enemy/enemy_area.tscn" id="2_84vye"]
 [ext_resource type="Texture2D" uid="uid://t2gbv81wrvwc" path="res://Assets/Pong/Textures/Characters/Front side Mini-pong.png" id="2_vamnb"]
 [ext_resource type="PackedScene" uid="uid://bb1218akphoo8" path="res://Assets/Models/Paladin/Paladin.glb" id="4_o5uld"]
+[ext_resource type="AudioStream" uid="uid://bafav4t3bu405" path="res://Assets/Kenney/SFX/explosion2.ogg" id="5_grfqg"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_hm887"]
 
@@ -56,6 +57,11 @@ debug_color = Color(0.9886814, 0, 0.3044817, 0.41960785)
 transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, 0.99999994, 0, -0.99999994, -4.3711385e-08, 0, 0, -1.0610726)
 visible = false
 mesh = SubResource("PrismMesh_hm887")
+
+[node name="deathsound" type="AudioStreamPlayer3D" parent="." unique_id=386339079]
+stream = ExtResource("5_grfqg")
+volume_db = -10.0
+pitch_scale = 2.29
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
