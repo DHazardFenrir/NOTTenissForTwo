@@ -3,20 +3,15 @@
 [ext_resource type="Script" uid="uid://dgxaiw583y2gq" path="res://scenes/Levels/encounter.gd" id="1_ljgs4"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hm887"]
-size = Vector3(5, 1, 1)
+size = Vector3(3, 1, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5y5st"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mqya5"]
 size = Vector3(5, 5, 5)
 
-[node name="Encounter" type="Node3D" unique_id=2866719 node_paths=PackedStringArray("enemy_area")]
+[node name="Encounter" type="Node3D" unique_id=2866719]
 script = ExtResource("1_ljgs4")
-enemy_amount = 2
-enemy_area = NodePath("EnemyArea")
-
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1027971446]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.195869)
 
 [node name="EnemyArea" type="Area3D" parent="." unique_id=1433872284]
 
@@ -24,7 +19,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.195869)
 shape = SubResource("BoxShape3D_hm887")
 
 [node name="BallSpawner" type="Area3D" parent="." unique_id=1457289594]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.104762)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10.117986)
 
 [node name="BallCollisionShape" type="CollisionShape3D" parent="BallSpawner" unique_id=62802004]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.2694616)
@@ -36,7 +31,13 @@ debug_color = Color(0.50442606, 0.17436501, 0.99999994, 0.41960785)
 [node name="PlayerWalkInArea" type="Area3D" parent="." unique_id=604994341]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.401664)
 
+[node name="Marker3D" type="Marker3D" parent="PlayerWalkInArea" unique_id=101640608]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.6839876)
+gizmo_extents = 2.74
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerWalkInArea" unique_id=1726400535]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.6839876)
 shape = SubResource("BoxShape3D_mqya5")
+debug_color = Color(0.5607713, 0.5590311, 7.70092e-07, 0.41960785)
 
 [connection signal="body_entered" from="PlayerWalkInArea" to="." method="_on_player_walk_in_area_body_entered"]

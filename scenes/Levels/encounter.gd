@@ -1,75 +1,92 @@
+class_name Encounter
 extends Node3D
-
-# The purpose of this script is to handle each encounter
-# Each encounter should have at least one enemy DONE
-# And each encounter should have at least one ball active at all times. NOT DONE
-
-@export var enemy_amount:= 1
-@export var ball_amount:= 1
-@export var enemy_area: Area3D
-@export var encounter_started:= false
-@onready var collision_shape_3d: CollisionShape3D = $EnemyArea/CollisionShape3D
-@onready var ball_collision_shape: CollisionShape3D = $BallSpawner/BallCollisionShape
-
-
-@onready var ball_parent: Node3D = $BallParent
 
 signal encounterFinished
 
-var enemy = preload("res://scenes/Enemy/enemy.tscn")
-var ball = preload("res://scenes/Ball/ball.tscn")
+@export var enemy_amount := 1
+@export var ball_amount := 1
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	
-	#FOR DEBUG ONLY
-	# BALLS SHOULD SPAWN WHEN PLAYER WALKS INTO AREA
-	pass # Replace with function body.
+@onready var enemy_spawn_shape: CollisionShape3D = $EnemyArea/CollisionShape3D
+@onready var ball_spawn_shape: CollisionShape3D = $BallSpawner/BallCollisionShape
+@onready var ball_parent: Node3D = $BallParent
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+var enemy_scene := preload("res://scenes/Enemy/enemy.tscn")
+var ball_scene := preload("res://scenes/Ball/ball.tscn")
 
-func _on_enemy_died() -> void:
-	enemy_amount -= 1
-	if enemy_amount <= 0:
-		encounterFinished.emit()
-
-func get_random_point_in_area(col: CollisionShape3D) -> Vector3:
-	var local := Vector3.ZERO
-	var shape = col.shape
-	
-	if shape is BoxShape3D:
-		var half: Vector3 = shape.size * 0.5
-		local = Vector3(
-			randf_range(-half.x, half.x),
-			0.0,
-			randf_range(-half.z, half.z)
-		)
-	else:
-		push_warning("Unsupported enemy area shape: %s. Should be BoxShape3D" % shape)
-	
-	return col.global_transform * local
-
-func ball_destroyed() -> void:
-	spawn_balls()
-	
-
-func spawn_balls() -> void:
-	while ball_parent.get_child_count() < ball_amount:
-		var ballInstance = ball.instantiate()
-		ballInstance.ballDeath.connect(ball_destroyed)
-		ballInstance.position = get_random_point_in_area(ball_collision_shape)
-		ball_parent.add_child(ballInstance)
-		print(ballInstance.get_groups())
+var encounter_started := false
+var encounter_finished := false
+var enemies_alive := 0
 
 
 func _on_player_walk_in_area_body_entered(body: Node3D) -> void:
-	if body.is_in_group("Player"):
-		encounter_started = true
-		spawn_balls()
-		for i in range(enemy_amount):
-			var enemyInstance = enemy.instantiate()
-			enemyInstance.deadEnemySignal.connect(_on_enemy_died)
-			enemyInstance.position = get_random_point_in_area(collision_shape_3d)
-			add_child(enemyInstance)
+	if encounter_started or not body.is_in_group("Player"):
+		return
+	encounter_started = true
+
+	spawn_enemies()
+	spawn_balls()
+
+
+func spawn_enemies() -> void:
+	enemies_alive = enemy_amount
+	for i in enemy_amount:
+		var e := enemy_scene.instantiate()
+		e.deadEnemySignal.connect(_on_enemy_died)
+		add_child(e)  # add first...
+		e.global_position = get_random_point_in_area(enemy_spawn_shape)  # ...then place globally
+
+
+func _on_enemy_died() -> void:
+	if encounter_finished:
+		return
+	enemies_alive -= 1
+	if enemies_alive <= 0:
+		finish_encounter()
+
+
+func finish_encounter() -> void:
+	encounter_finished = true 
+	_clear_balls()
+	encounterFinished.emit()
+
+
+func spawn_balls() -> void:
+	if encounter_finished:
+		return
+	while _active_ball_count() < ball_amount:
+		var b := ball_scene.instantiate() as RigidBody3D
+		b.ballDeath.connect(_on_ball_destroyed)
+		ball_parent.add_child(b)
+		b.global_position = get_random_point_in_area(ball_spawn_shape)
+		var dir := enemy_spawn_shape.global_position - b.global_position
+		dir.y = 0.0
+		b.apply_central_impulse(dir.normalized() * 0.5)
+
+
+func _on_ball_destroyed() -> void:
+	if not encounter_finished:
+		spawn_balls.call_deferred()
+
+
+func _active_ball_count() -> int:
+	var count := 0
+	for child in ball_parent.get_children():
+		if not child.is_queued_for_deletion():
+			count += 1
+	return count
+
+func _clear_balls() -> void:
+	for child in ball_parent.get_children():
+		child.queue_free()
+
+func get_random_point_in_area(col: CollisionShape3D) -> Vector3:
+	var local := Vector3.ZERO
+	var shape := col.shape
+
+	if shape is BoxShape3D:
+		var half: Vector3 = shape.size * 0.5
+		local = Vector3(randf_range(-half.x, half.x), 0.0, randf_range(-half.z, half.z))
+	else:
+		push_warning("Unsupported spawn shape: %s. Should be BoxShape3D" % shape)
+
+	return col.global_transform * local

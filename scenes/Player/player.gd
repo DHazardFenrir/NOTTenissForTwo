@@ -100,7 +100,7 @@ func _on_hitbox_body_entered(body):
 	body.reflected = true
 
 
-func take_damage(amount):
+func take_damage(amount = 1):
 	if blocking:
 		return
 	health -= amount
@@ -108,4 +108,8 @@ func take_damage(amount):
 	if health <= 0:
 		get_tree().reload_current_scene()
 
-	
+
+func _on_hurtbox_body_entered(body: Node3D) -> void:
+	if body.is_in_group("Balls"):
+		take_damage(body.damage)
+		body.ball_death()

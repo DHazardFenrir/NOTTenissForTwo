@@ -1,16 +1,21 @@
 extends Node3D
 
-@export var player: CharacterBody3D
-@export var enemy1: CharacterBody3D
-@export var enemy2: CharacterBody3D
-@export var enemy3: CharacterBody3D
+signal dungeonBeaten
 
+@export var player: CharacterBody3D
+@export var encounters: Array[Encounter]
+var encountersCleared:= 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	enemy1.deadEnemySignal.connect(_on_enemy_died)
-	enemy2.deadEnemySignal.connect(_on_enemy_died)
-	enemy3.deadEnemySignal.connect(_on_enemy_died)
+	for encounter in encounters:
+		encounter.encounterFinished.connect(_on_encounter_finished)
+	
 	pass # Replace with function body.
 
-func _on_enemy_died() -> void:
+func _on_encounter_finished() -> void:
+	
+	encountersCleared += 1
+	print("Encounter finished. ", encountersCleared, " of ", encounters.size())
+	if encountersCleared >= encounters.size():
+		dungeonBeaten.emit()
 	player.unlock()

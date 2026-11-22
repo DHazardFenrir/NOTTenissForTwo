@@ -3,9 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://bdcbl87t7lit2" path="res://scenes/Player/player.tscn" id="1_c4wp1"]
 [ext_resource type="PackedScene" uid="uid://d3udu2hwx0aak" path="res://scenes/Levels/initial_hallway.tscn" id="1_fpimf"]
 [ext_resource type="PackedScene" uid="uid://c0kobsfpf1uqd" path="res://scenes/UI/hud.tscn" id="1_hsn05"]
+[ext_resource type="Script" uid="uid://dnn5sqqtw4qsd" path="res://scenes/dungeon.gd" id="1_tkjml"]
 [ext_resource type="PackedScene" uid="uid://cdi8w7vb3g7tf" path="res://scenes/Levels/level_one.tscn" id="2_0wj4k"]
-[ext_resource type="PackedScene" uid="uid://b52p6bx8nl548" path="res://scenes/Ball/ball.tscn" id="4_0wj4k"]
-[ext_resource type="PackedScene" uid="uid://dt4exijh73hko" path="res://scenes/Enemy/enemy.tscn" id="4_etlrv"]
+[ext_resource type="PackedScene" uid="uid://cakiylf2y2xv4" path="res://scenes/Levels/encounter.tscn" id="2_5hkx1"]
 [ext_resource type="PackedScene" uid="uid://c053tv1pp21r2" path="res://scenes/Levels/left_hallway.tscn" id="5_fvacq"]
 [ext_resource type="PackedScene" uid="uid://d0ga7atkt1oih" path="res://scenes/Levels/hallway_right.tscn" id="6_ys5p8"]
 [ext_resource type="Script" uid="uid://cvlrtu8pwfdoa" path="res://scenes/enemy_manager.gd" id="9_tkjml"]
@@ -19,13 +19,21 @@ _data = {
 point_count = 75
 
 [node name="Dungeon" type="Node3D" unique_id=652314026]
+script = ExtResource("1_tkjml")
 
-[node name="EnemyManager" type="Node3D" parent="." unique_id=440692106 node_paths=PackedStringArray("player", "enemy1", "enemy2", "enemy3")]
+[node name="EncounterManager" type="Node3D" parent="." unique_id=440692106 node_paths=PackedStringArray("player", "encounters")]
 script = ExtResource("9_tkjml")
 player = NodePath("../Path3D/PathFollow3D/Player")
-enemy1 = NodePath("../Enemy1")
-enemy2 = NodePath("../Enemy2")
-enemy3 = NodePath("../Enemy3")
+encounters = [NodePath("Encounter1"), NodePath("Encounter2"), NodePath("Encounter3")]
+
+[node name="Encounter1" parent="EncounterManager" unique_id=616231138 instance=ExtResource("2_5hkx1")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 1.499325, -30.522259)
+
+[node name="Encounter2" parent="EncounterManager" unique_id=2866719 instance=ExtResource("2_5hkx1")]
+transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, 54.351692, 1.8361988, -54.305157)
+
+[node name="Encounter3" parent="EncounterManager" unique_id=1878003849 instance=ExtResource("2_5hkx1")]
+transform = Transform3D(-0.9999999, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.9999999, 102.90512, 1.3081899, -99.22046)
 
 [node name="HUD" parent="." unique_id=1101074698 instance=ExtResource("1_hsn05")]
 
@@ -36,18 +44,6 @@ transform = Transform3D(-0.0047180913, 0, -0.99998885, 0, 1, 0, 0.99998885, 0, -
 
 [node name="LevelOne" parent="." unique_id=1185466771 instance=ExtResource("2_0wj4k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -19.990135)
-
-[node name="Enemy1" parent="." unique_id=1933570996 instance=ExtResource("4_etlrv")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 1.5363, -31.35759)
-difficulty = 0
-
-[node name="Enemy2" parent="." unique_id=1013824499 instance=ExtResource("4_etlrv")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 57.313885, 1.5363, -54.82901)
-difficulty = 0
-
-[node name="Enemy3" parent="." unique_id=1930187884 instance=ExtResource("4_etlrv")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 102.834335, 1.5363, -77.32379)
-difficulty = 0
 
 [node name="Path3D" type="Path3D" parent="." unique_id=1106871696]
 curve = SubResource("Curve3D_ys5p8")
@@ -60,6 +56,7 @@ rotation_mode = 1
 [node name="Player" parent="Path3D/PathFollow3D" unique_id=907270912 instance=ExtResource("1_c4wp1")]
 transform = Transform3D(1.0000021, 0, 0, 0, 1.000004, 0, 0, 0, 1.0000012, -0.58552134, 1.2589657, -1.2601261)
 dodge_side = 1.5
+max_health = 50
 
 [node name="SM_Prop_Lute_01" parent="Path3D/PathFollow3D/Player/Head/Camera3D" parent_id_path=PackedInt32Array(907270912, 1592888888) index="0" unique_id=1832657628]
 transform = Transform3D(0.33221257, -0.25783482, -0.0024247882, -0.35524836, -0.21839513, 0.22437032, -0.1159024, -0.06964012, -0.6946597, 0.201, -0.33356416, -0.42691714)
@@ -67,9 +64,6 @@ transform = Transform3D(0.33221257, -0.25783482, -0.0024247882, -0.35524836, -0.
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=102645056]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 5.742964, 4.804682, 0)
 shadow_enabled = true
-
-[node name="Ball" parent="." unique_id=2122994294 instance=ExtResource("4_0wj4k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2258428, 1.8657568, -12.287729)
 
 [node name="Node3D" parent="." unique_id=957750416 instance=ExtResource("5_fvacq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03488636, -0.01183033, -39.886875)
@@ -134,4 +128,8 @@ transform = Transform3D(-0.0047006872, 0, -0.999989, 0, 1, 0, 0.999989, 0, -0.00
 [node name="InitialHallway14" parent="." unique_id=1975466276 instance=ExtResource("1_fpimf")]
 transform = Transform3D(-0.006325604, 0, -0.99998, 0, 1, 0, 0.99998, 0, -0.006325604, -27.748215, 0.060747504, -112.38114)
 
+[connection signal="dungeonBeaten" from="EncounterManager" to="." method="_on_encounter_manager_dungeon_beaten"]
+
+[editable path="EncounterManager/Encounter1"]
+[editable path="EncounterManager/Encounter2"]
 [editable path="Path3D/PathFollow3D/Player"]

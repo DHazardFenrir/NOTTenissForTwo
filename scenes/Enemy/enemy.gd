@@ -42,11 +42,11 @@ func _physics_process(delta: float) -> void:
 func _get_speed() -> float:
 	match difficulty:
 		Difficulty.EASY:
-			return 2.5
+			return 1.0
 		Difficulty.MEDIUM:
-			return 4.0
+			return 2.5
 		_:  # HARD
-			return 6.0
+			return 4.0
 
 func _choose_ball(delta: float) -> void:
 	_recheck_timer -= delta
@@ -118,8 +118,11 @@ func _on_hitbox_body_entered(body: Node3D) -> void:
 var is_dead := false
 
 func _on_hurtbox_body_entered(body: Node3D) -> void:
-	if body.is_in_group("Balls"):
-		_enemy_take_damage()
+	if not body.is_in_group("Balls") or body.is_queued_for_deletion():
+		return
+	# consume the ball first, so other enemies ignore it
+	body.ball_death()      
+	_enemy_take_damage()
 
 func _enemy_take_damage(value = 1) -> void:
 	if is_dead:
