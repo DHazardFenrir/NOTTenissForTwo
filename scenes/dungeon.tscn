@@ -17,12 +17,6 @@ point_count = 75
 
 [node name="Dungeon" type="Node3D" unique_id=652314026]
 
-[node name="Player" parent="." unique_id=907270912 instance=ExtResource("1_c4wp1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-
-[node name="SM_Prop_Lute_01" parent="Player/Head/Camera3D" parent_id_path=PackedInt32Array(907270912, 1592888888) index="0" unique_id=1832657628]
-transform = Transform3D(0.33221257, -0.25783482, -0.0024247882, -0.35524836, -0.21839513, 0.22437032, -0.1159024, -0.06964012, -0.6946597, 0.201, -0.33356416, -0.42691714)
-
 [node name="LevelOne3" parent="." unique_id=1029602578 instance=ExtResource("2_0wj4k")]
 transform = Transform3D(-0.0047180913, 0, -0.99998885, 0, 1, 0, 0.99998885, 0, -0.0047180913, 44.612556, -0.0178473, -54.70628)
 

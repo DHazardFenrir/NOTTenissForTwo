@@ -19,7 +19,6 @@ var stopped = false
 var next_stop = 0
 var yaw = 0.0
 var health = 5
-var blocking = false
 var double_swing = false
 
 
@@ -52,8 +51,6 @@ func _physics_process(delta):
 	
 	velocity.x = direction.x * speed
 	velocity.z = direction.z * speed
-
-func _physics_process(delta):
 	if not stopped:
 		follow.progress += speed * delta
 
@@ -105,8 +102,12 @@ func _physics_process(delta):
 func unlock():
 	stopped = false
 
+func take_damage(amount):
+	if blocking:
+		return
 
-func _on_hitbox_body_entered(body):
+
+func _on_hitbox_body_entered(body: Node3D):
 	if not body.is_in_group("ball"):
 		return
 
@@ -123,14 +124,6 @@ func _on_hitbox_body_entered(body):
 	body.linear_velocity = Vector3.ZERO
 	body.apply_central_impulse(dir.normalized() * power)
 	body.reflected = true
-
-
-func take_damage(amount):
-	if blocking:
-		return
-
-func _on_hitbox_body_entered(body: Node3D) -> void:
-	print(body.get_groups())
 	if not body.is_in_group("Balls"):
 		return
 
@@ -141,8 +134,6 @@ func _on_hitbox_body_entered(body: Node3D) -> void:
 	var right := global_basis.x
 	right.y = 0.0
 	right = right.normalized()
-
-	var dir: Vector3
 
 	match hit_style:
 		HitStyle.REFLECT:
@@ -162,8 +153,13 @@ func _on_hitbox_body_entered(body: Node3D) -> void:
 
 	dir = dir.normalized()
 	body.linear_velocity = Vector3.ZERO  # stop it so the hit feels consistent
-	body.apply_central_impulse(dir * swingPower)
+	body.apply_central_impulse(dir * swing_power)
 	body.reflected = true
+	
+	## TODO: Not sure where amount comes from
+	## HARDCODEADO
+	var amount = 1
+	## FIX SOON
 	health -= amount
 	print("Vida: ", health)
 
